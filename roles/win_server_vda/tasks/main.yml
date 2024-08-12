@@ -1,0 +1,12 @@
+---
+- name: Validate
+  ansible.builtin.import_tasks: validate.yml
+
+- name: Prepare
+  ansible.builtin.import_tasks: prepare.yml
+
+- name: Install
+  ansible.builtin.import_tasks: install.yml
+
+- name: Optimize
+  ansible.builtin.import_tasks: optimize.yml

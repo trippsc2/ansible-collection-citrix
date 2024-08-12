@@ -1,0 +1,4 @@
+---
+- name: Reboot machine
+  listen: _ctxvda_reboot
+  ansible.windows.win_reboot:

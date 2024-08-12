@@ -1,0 +1,52 @@
+---
+- name: Gather OS facts
+  when:
+    - ansible_distribution is not defined or
+      ansible_os_family is not defined
+  ansible.builtin.setup:
+    gather_subset:
+      - '!all'
+      - '!min'
+      - distribution
+      - os_family
+
+- name: Validate OS
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == 'Windows'
+      - ('Windows Server' in ansible_distribution)
+    fail_msg: "This role only supports Windows Server.  {{ ansible_distribution }} is not supported."
+    success_msg: "This role supports {{ ansible_distribution }}."
+
+- name: Get installer info
+  ansible.windows.win_stat:
+    path: "{{ ctxvda_installer_path }}"
+  register: _ctxvda_installer_info
+
+- name: Validate installer exists
+  ansible.builtin.assert:
+    that:
+      - _ctxvda_installer_info.stat.exists
+    fail_msg: "The installer file '{{ ctxvda_installer_path }}' does not exist."
+    success_msg: "The installer file '{{ ctxvda_installer_path }}' exists."
+
+- name: Validate installer is from a supported version
+  ansible.builtin.assert:
+    that:
+      - _ctxvda_installer_info.stat.checksum in _ctxvda_version_by_checksum.keys()
+    fail_msg: "The installer file '{{ ctxvda_installer_path }}' is not from a supported version. Supported versions are between 2303 and 2407."
+    success_msg: "The installer file '{{ ctxvda_installer_path }}' is for version '{{ _ctxvda_version_by_checksum[_ctxvda_installer_info.stat.checksum] }}' which is supported."
+
+- name: Set Product ID variable
+  ansible.builtin.set_fact:
+    _ctxvda_product_id: "{{ _ctxvda_product_id_by_checksum[_ctxvda_installer_info.stat.checksum] }}"
+
+- name: Validate Rendezvous Proxy configuration
+  when:
+    - ctxvda_install_rendezvous
+    - ctxvda_rendezvous_proxy_config is defined
+  ansible.builtin.assert:
+    that:
+      - ctxvda_rendezvous_proxy_config is uri
+    fail_msg: "The 'ctxvda_rendezvous_proxy_config' variable is must be a valid URL."
+    success_msg: "The 'ctxvda_rendezvous_proxy_config' variable is a valid URL."

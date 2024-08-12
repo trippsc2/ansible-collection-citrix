@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts:
+    - subjects
+  gather_facts: false
+  tasks:
+    - name: Check if the CQI is installed
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+
+          $CQI = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Connection Quality Indicator*" }))
+
+          $Ansible.Result = $CQI.Count -gt 0
+      register: _vda_installed
+
+    - name: Assert
+      ansible.builtin.assert:
+        that:
+          - _vda_installed.result
+        fail_msg: The Citrix CQI is not installed
+        success_msg: The Citrix CQI is installed

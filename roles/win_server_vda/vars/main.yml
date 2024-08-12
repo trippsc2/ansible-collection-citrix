@@ -1,0 +1,568 @@
+---
+_ctxvda_version_by_checksum:
+  3a9a2a538b14aec45c92133a359a9c6eb4fae156: '2407'
+  7f8f17747ea75a220f2f3d45b90d913b1239223a: '2402'
+  182028a8f66d024d83d834e275e988fa50dce2ec: '2311'
+  133ddc2bd399890bbf1d95ade1058362f6c32ad4: '2308'
+  7c533c07247d0b65e6a6bb48662ca2e0b7f65a49: '2305'
+  bc78b3e544fe1df379f60b2c3da9c8731571fd38: '2303'
+
+_ctxvda_product_id_by_checksum:
+  3a9a2a538b14aec45c92133a359a9c6eb4fae156: '{3D873369-A6BF-4D58-9816-6CC863A6CC6E}'
+  7f8f17747ea75a220f2f3d45b90d913b1239223a: '{FB34BE11-343D-46DA-82B4-2E689836DED9}'
+  182028a8f66d024d83d834e275e988fa50dce2ec: '{72CAF7BF-CD0C-4B1A-854D-0E2F767DB050}'
+  133ddc2bd399890bbf1d95ade1058362f6c32ad4: '{41799013-13CD-4B19-95B1-21689F9F67AD}'
+  7c533c07247d0b65e6a6bb48662ca2e0b7f65a49: '{EA97B6D0-24D5-46D0-80FD-7B5E8A317EB4}'
+  bc78b3e544fe1df379f60b2c3da9c8731571fd38: '{CD50ADA8-57E8-48F4-AFFC-09A7DE0249B4}'
+
+_ctxvda_default_disabled_services_by_install_type:
+  mcs:
+    - display_name: AllJoyn Router Service
+      name: AJRouter
+    - display_name: Application Layer Gateway Service
+      name: ALG
+    - display_name: Bluetooth Audio Gateway Service
+      name: BTAGService
+    - display_name: Bluetooth Support Service
+      name: bthserv
+    - display_name: Diagnostic Policy Service
+      name: DPS
+    - display_name: Diagnostic Service Host
+      name: WdiServiceHost
+    - display_name: Diagnostic System Host
+      name: WdiSystemHost
+    - display_name: Downloaded Maps Manager
+      name: MapsBroker
+    - display_name: Encrypting File System (EFS)
+      name: EFS
+    - display_name: Function Discovery Provider Host
+      name: fdPHost
+    - display_name: Function Discovery Resource Publication
+      name: FDResPub
+    - display_name: Internet Connection Sharing (ICS)
+      name: SharedAccess
+    - display_name: Offline Files
+      name: CscService
+    - display_name: Payments and NFC/SE Manager
+      name: SEMgrSvc
+    - display_name: Secure Socket Tunneling Protocol Service
+      name: SstpSvc
+    - display_name: Sensor Monitoring Service
+      name: SensrSvc
+    - display_name: Shared PC Account Manager
+      name: shpamsvc
+    - display_name: SSDP Discovery
+      name: SSDPSRV
+    - display_name: UPnP Device Host
+      name: upnphost
+    - display_name: Windows Media Player Network Sharing Service
+      name: WMPNetworkSvc
+    - display_name: Windows Mobile Hotspot Service
+      name: icssvc
+    - display_name: Superfetch
+      name: SysMain
+    - display_name: Windows Error Reporting Service
+      name: WerSvc
+  pvs:
+    - display_name: AllJoyn Router Service
+      name: AJRouter
+    - display_name: Application Layer Gateway Service
+      name: ALG
+    - display_name: Bluetooth Audio Gateway Service
+      name: BTAGService
+    - display_name: Bluetooth Support Service
+      name: bthserv
+    - display_name: Diagnostic Policy Service
+      name: DPS
+    - display_name: Diagnostic Service Host
+      name: WdiServiceHost
+    - display_name: Diagnostic System Host
+      name: WdiSystemHost
+    - display_name: Downloaded Maps Manager
+      name: MapsBroker
+    - display_name: Encrypting File System (EFS)
+      name: EFS
+    - display_name: Function Discovery Provider Host
+      name: fdPHost
+    - display_name: Function Discovery Resource Publication
+      name: FDResPub
+    - display_name: Internet Connection Sharing (ICS)
+      name: SharedAccess
+    - display_name: Offline Files
+      name: CscService
+    - display_name: Payments and NFC/SE Manager
+      name: SEMgrSvc
+    - display_name: Secure Socket Tunneling Protocol Service
+      name: SstpSvc
+    - display_name: Sensor Monitoring Service
+      name: SensrSvc
+    - display_name: Shared PC Account Manager
+      name: shpamsvc
+    - display_name: SSDP Discovery
+      name: SSDPSRV
+    - display_name: UPnP Device Host
+      name: upnphost
+    - display_name: Windows Media Player Network Sharing Service
+      name: WMPNetworkSvc
+    - display_name: Windows Mobile Hotspot Service
+      name: icssvc
+    - display_name: Superfetch
+      name: SysMain
+    - display_name: Windows Error Reporting Service
+      name: WerSvc
+  remotepc:
+    - display_name: AllJoyn Router Service
+      name: AJRouter
+    - display_name: Application Layer Gateway Service
+      name: ALG
+    - display_name: Bluetooth Audio Gateway Service
+      name: BTAGService
+    - display_name: Bluetooth Support Service
+      name: bthserv
+    - display_name: Diagnostic Policy Service
+      name: DPS
+    - display_name: Diagnostic Service Host
+      name: WdiServiceHost
+    - display_name: Diagnostic System Host
+      name: WdiSystemHost
+    - display_name: Downloaded Maps Manager
+      name: MapsBroker
+    - display_name: Encrypting File System (EFS)
+      name: EFS
+    - display_name: Function Discovery Provider Host
+      name: fdPHost
+    - display_name: Function Discovery Resource Publication
+      name: FDResPub
+    - display_name: Internet Connection Sharing (ICS)
+      name: SharedAccess
+    - display_name: Offline Files
+      name: CscService
+    - display_name: Payments and NFC/SE Manager
+      name: SEMgrSvc
+    - display_name: Secure Socket Tunneling Protocol Service
+      name: SstpSvc
+    - display_name: Sensor Monitoring Service
+      name: SensrSvc
+    - display_name: Shared PC Account Manager
+      name: shpamsvc
+    - display_name: SSDP Discovery
+      name: SSDPSRV
+    - display_name: UPnP Device Host
+      name: upnphost
+    - display_name: Windows Media Player Network Sharing Service
+      name: WMPNetworkSvc
+    - display_name: Windows Mobile Hotspot Service
+      name: icssvc
+    - display_name: Windows Error Reporting Service
+      name: WerSvc
+
+_ctxvda_default_disabled_scheduled_tasks_by_install_type:
+  mcs:
+    - name: AnalyzeSystem
+      path: \Microsoft\Windows\Power Efficiency Diagnostics
+    - name: BfeOnServiceStartTypeChange
+      path: \Microsoft\Windows\Windows Filtering Platform
+    - name: Consolidator
+      path: \Microsoft\Windows\Customer Experience Improvement Program
+    - name: CreateObjectTask
+      path: \Microsoft\Windows\Shell
+    - name: IndexerAutomaticMaintenance
+      path: \Microsoft\Windows\Shell
+    - name: MapsToastTask
+      path: \Microsoft\Windows\Maps
+    - name: Microsoft Compatibility Appraiser
+      path: \Microsoft\Windows\Application Experience
+    - name: Microsoft-Windows-DiskDiagnosticDataCollector
+      path: \Microsoft\Windows\DiskDiagnostic
+    - name: Microsoft-Windows-DiskDiagnosticResolver
+      path: \Microsoft\Windows\DiskDiagnostic
+    - name: MNO Metadata Parser
+      path: \Microsoft\Windows\Mobile Broadband Accounts
+    - name: MobilityManager
+      path: \Microsoft\Windows\Ras
+    - name: Notifications
+      path: \Microsoft\Windows\Location
+    - name: ProactiveScan
+      path: \Microsoft\Windows\Chkdsk
+    - name: ProcessMemoryDiagnosticEvents
+      path: \Microsoft\Windows\MemoryDiagnostic
+    - name: ProgramDataUpdater
+      path: \Microsoft\Windows\Application Experience
+    - name: Proxy
+      path: \Microsoft\Windows\Autochk
+    - name: QueueReporting
+      path: \Microsoft\Windows\Windows Error Reporting
+    - name: RegIdleBackup
+      path: \Microsoft\Windows\Registry
+    - name: ResolutionHost
+      path: \Microsoft\Windows\WDI
+    - name: RunFullMemoryDiagnostic
+      path: \Microsoft\Windows\MemoryDiagnostic
+    - name: Scheduled
+      path: \Microsoft\Windows\Diagnosis
+    - name: ScheduledDefrag
+      path: \Microsoft\Windows\Defrag
+    - name: ServerManager
+      path: \Microsoft\Windows\Server Manager
+    - name: StartComponentCleanup
+      path: \Microsoft\Windows\Servicing
+    - name: StartupAppTask
+      path: \Microsoft\Windows\Application Experience
+    - name: TPM-Maintenance
+      path: \Microsoft\Windows\TPM
+    - name: UninstallDeviceTask
+      path: \Microsoft\Windows\Bluetooth
+    - name: UPnPHostConfig
+      path: \Microsoft\Windows\UPnP
+    - name: UsbCeip
+      path: \Microsoft\Windows\Customer Experience Improvement Program
+    - name: VerifyWinRE
+      path: \Microsoft\Windows\RecoveryEnvironment
+    - name: Windows Defender Cache Maintenance
+      path: \Microsoft\Windows\Windows Defender
+    - name: Windows Defender Cleanup
+      path: \Microsoft\Windows\Windows Defender
+    - name: Windows Defender Verification
+      path: \Microsoft\Windows\Windows Defender
+    - name: UpdateLibrary
+      path: \Microsoft\Windows\Windows Media Sharing
+    - name: WinSAT
+      path: \Microsoft\Windows\Maintenance
+    - name: Recovery-Check
+      path: \Microsoft\Windows\Workplace Join
+  pvs:
+    - name: AnalyzeSystem
+      path: \Microsoft\Windows\Power Efficiency Diagnostics
+    - name: BfeOnServiceStartTypeChange
+      path: \Microsoft\Windows\Windows Filtering Platform
+    - name: Consolidator
+      path: \Microsoft\Windows\Customer Experience Improvement Program
+    - name: CreateObjectTask
+      path: \Microsoft\Windows\Shell
+    - name: IndexerAutomaticMaintenance
+      path: \Microsoft\Windows\Shell
+    - name: MapsToastTask
+      path: \Microsoft\Windows\Maps
+    - name: Microsoft Compatibility Appraiser
+      path: \Microsoft\Windows\Application Experience
+    - name: Microsoft-Windows-DiskDiagnosticDataCollector
+      path: \Microsoft\Windows\DiskDiagnostic
+    - name: Microsoft-Windows-DiskDiagnosticResolver
+      path: \Microsoft\Windows\DiskDiagnostic
+    - name: MNO Metadata Parser
+      path: \Microsoft\Windows\Mobile Broadband Accounts
+    - name: MobilityManager
+      path: \Microsoft\Windows\Ras
+    - name: Notifications
+      path: \Microsoft\Windows\Location
+    - name: ProactiveScan
+      path: \Microsoft\Windows\Chkdsk
+    - name: ProcessMemoryDiagnosticEvents
+      path: \Microsoft\Windows\MemoryDiagnostic
+    - name: ProgramDataUpdater
+      path: \Microsoft\Windows\Application Experience
+    - name: Proxy
+      path: \Microsoft\Windows\Autochk
+    - name: QueueReporting
+      path: \Microsoft\Windows\Windows Error Reporting
+    - name: RegIdleBackup
+      path: \Microsoft\Windows\Registry
+    - name: ResolutionHost
+      path: \Microsoft\Windows\WDI
+    - name: RunFullMemoryDiagnostic
+      path: \Microsoft\Windows\MemoryDiagnostic
+    - name: Scheduled
+      path: \Microsoft\Windows\Diagnosis
+    - name: ScheduledDefrag
+      path: \Microsoft\Windows\Defrag
+    - name: ServerManager
+      path: \Microsoft\Windows\Server Manager
+    - name: StartComponentCleanup
+      path: \Microsoft\Windows\Servicing
+    - name: StartupAppTask
+      path: \Microsoft\Windows\Application Experience
+    - name: TPM-Maintenance
+      path: \Microsoft\Windows\TPM
+    - name: UninstallDeviceTask
+      path: \Microsoft\Windows\Bluetooth
+    - name: UPnPHostConfig
+      path: \Microsoft\Windows\UPnP
+    - name: UsbCeip
+      path: \Microsoft\Windows\Customer Experience Improvement Program
+    - name: VerifyWinRE
+      path: \Microsoft\Windows\RecoveryEnvironment
+    - name: Windows Defender Cache Maintenance
+      path: \Microsoft\Windows\Windows Defender
+    - name: Windows Defender Cleanup
+      path: \Microsoft\Windows\Windows Defender
+    - name: Windows Defender Verification
+      path: \Microsoft\Windows\Windows Defender
+    - name: UpdateLibrary
+      path: \Microsoft\Windows\Windows Media Sharing
+    - name: WinSAT
+      path: \Microsoft\Windows\Maintenance
+    - name: Recovery-Check
+      path: \Microsoft\Windows\Workplace Join
+  remotepc:
+    - name: AnalyzeSystem
+      path: \Microsoft\Windows\Power Efficiency Diagnostics
+    - name: BfeOnServiceStartTypeChange
+      path: \Microsoft\Windows\Windows Filtering Platform
+    - name: Consolidator
+      path: \Microsoft\Windows\Customer Experience Improvement Program
+    - name: CreateObjectTask
+      path: \Microsoft\Windows\Shell
+    - name: IndexerAutomaticMaintenance
+      path: \Microsoft\Windows\Shell
+    - name: MapsToastTask
+      path: \Microsoft\Windows\Maps
+    - name: Microsoft Compatibility Appraiser
+      path: \Microsoft\Windows\Application Experience
+    - name: Microsoft-Windows-DiskDiagnosticDataCollector
+      path: \Microsoft\Windows\DiskDiagnostic
+    - name: MNO Metadata Parser
+      path: \Microsoft\Windows\Mobile Broadband Accounts
+    - name: MobilityManager
+      path: \Microsoft\Windows\Ras
+    - name: Notifications
+      path: \Microsoft\Windows\Location
+    - name: ProcessMemoryDiagnosticEvents
+      path: \Microsoft\Windows\MemoryDiagnostic
+    - name: ProgramDataUpdater
+      path: \Microsoft\Windows\Application Experience
+    - name: Proxy
+      path: \Microsoft\Windows\Autochk
+    - name: QueueReporting
+      path: \Microsoft\Windows\Windows Error Reporting
+    - name: ResolutionHost
+      path: \Microsoft\Windows\WDI
+    - name: RunFullMemoryDiagnostic
+      path: \Microsoft\Windows\MemoryDiagnostic
+    - name: Scheduled
+      path: \Microsoft\Windows\Diagnosis
+    - name: ServerManager
+      path: \Microsoft\Windows\Server Manager
+    - name: StartComponentCleanup
+      path: \Microsoft\Windows\Servicing
+    - name: StartupAppTask
+      path: \Microsoft\Windows\Application Experience
+    - name: TPM-Maintenance
+      path: \Microsoft\Windows\TPM
+    - name: UninstallDeviceTask
+      path: \Microsoft\Windows\Bluetooth
+    - name: UPnPHostConfig
+      path: \Microsoft\Windows\UPnP
+    - name: UsbCeip
+      path: \Microsoft\Windows\Customer Experience Improvement Program
+    - name: VerifyWinRE
+      path: \Microsoft\Windows\RecoveryEnvironment
+    - name: Windows Defender Cache Maintenance
+      path: \Microsoft\Windows\Windows Defender
+    - name: Windows Defender Cleanup
+      path: \Microsoft\Windows\Windows Defender
+    - name: Windows Defender Verification
+      path: \Microsoft\Windows\Windows Defender
+    - name: UpdateLibrary
+      path: \Microsoft\Windows\Windows Media Sharing
+    - name: WinSAT
+      path: \Microsoft\Windows\Maintenance
+    - name: Recovery-Check
+      path: \Microsoft\Windows\Workplace Join
+
+_ctxvda_default_disable_pagefile: >-
+  {{ ctxvda_install_type == 'mcs' or ctxvda_install_type == 'pvs' }}
+
+_ctxvda_disable_pagefile: >-
+  {{ ctxvda_disable_pagefile | default(_ctxvda_default_disable_pagefile) }}
+
+_ctxvda_default_install_vda_upgrade_agent: >-
+  {{ ctxvda_install_type == 'remotepc' }}
+
+_ctxvda_install_vda_upgrade_agent: >-
+  {{ ctxvda_install_vda_upgrade_agent | default(_ctxvda_default_install_vda_upgrade_agent) }}
+
+_ctxvda_default_install_mcs_io_driver: "{{ ctxvda_install_type == 'mcs' }}"
+
+_ctxvda_install_mcs_io_driver: >-
+  {{ ctxvda_install_mcs_io_driver | default(_ctxvda_default_install_mcs_io_driver) }}
+
+_ctxvda_default_disable_background_disk_defragmentation: >-
+  {{ ctxvda_install_type == 'mcs' or ctxvda_install_type == 'pvs' }}
+
+_ctxvda_disable_background_disk_defragmentation: >-
+  {{ ctxvda_disable_background_auto_layout |
+     default(_ctxvda_default_disable_background_disk_defragmentation) }}
+
+_ctxvda_default_disable_memory_dump_creation: >-
+  {{ ctxvda_install_type == 'mcs' or ctxvda_install_type == 'pvs' }}
+
+_ctxvda_disable_memory_dump_creation: >-
+  {{ ctxvda_disable_memory_dump_creation | default(_ctxvda_default_disable_memory_dump_creation) }}
+
+_ctxvda_default_disable_ntfs_last_access_time: >-
+  {{ ctxvda_install_type == 'mcs' or ctxvda_install_type == 'pvs' }}
+
+_ctxvda_disable_ntfs_last_access_time: >-
+  {{ ctxvda_disable_ntfs_last_access_time | default(_ctxvda_default_disable_ntfs_last_access_time) }}
+
+_ctxvda_default_disabled_services: >-
+  {{ _ctxvda_default_disabled_services_by_install_type[ctxvda_install_type] }}
+
+_ctxvda_disabled_services: >-
+  {{ ctxvda_disabled_services | default(_ctxvda_default_disabled_services) }}
+
+_ctxvda_default_disabled_scheduled_tasks: >-
+  {{ _ctxvda_default_disabled_scheduled_tasks_by_install_type[ctxvda_install_type] }}
+
+_ctxvda_disabled_scheduled_tasks: >-
+  {{ ctxvda_disabled_scheduled_tasks | default(_ctxvda_default_disabled_scheduled_tasks) }}
+
+_ctxvda_base_arguments:
+  - /quiet
+  - /logpath
+  - "\"{{ ctxvda_installer_log_path }}\""
+  - /noreboot
+  - /components
+  - VDA
+
+_ctxvda_controllers_arguments: >-
+  [
+  {% if ctxvda_controllers | default([]) | length > 0 %}
+    "/controllers",
+    "\"{{ ctxvda_controllers | join(",") }}\""
+  {% endif %}
+  ]
+
+_ctxvda_enable_hdx_ports_arguments: >-
+  [
+  {% if ctxvda_configure_windows_firewall %}
+    "/enable_hdx_ports"
+  {% endif %}
+  ]
+
+_ctxvda_enable_real_time_transport_arguments: >-
+  [
+  {% if ctxvda_enable_real_time_transport %}
+    "/enable_real_time_transport"
+  {% endif %}
+  ]
+
+_ctxvda_enable_hdx_udp_ports_arguments: >-
+  [
+  {% if ctxvda_configure_windows_firewall and ctxvda_enable_real_time_transport %}
+    "/enable_hdx_udp_ports"
+  {% endif %}
+  ]
+
+_ctxvda_enable_remote_assistance_arguments: >-
+  [
+  {% if ctxvda_install_remote_assistance %}
+    "/enable_remote_assistance"
+  {% endif %}
+  ]
+
+_ctxvda_enable_ss_ports_arguments: >-
+  [
+  {% if ctxvda_configure_windows_firewall and ctxvda_enable_screen_sharing %}
+    "/enable_ss_ports"
+  {% endif %}
+  ]
+
+_ctxvda_rendezvous_arguments: >-
+  [
+  {% if ctxvda_install_rendezvous %}
+    "\"Citrix Rendezvous V2\""
+  {% endif %}
+  ]
+
+_ctxvda_vda_upgrade_agent_arguments: >-
+  [
+  {% if _ctxvda_install_vda_upgrade_agent %}
+    "\"Citrix VDA Upgrade Agent\""
+  {% endif %}
+  ]
+
+_ctxvda_profile_management_arguments: >-
+  [
+  {% if ctxvda_install_profile_management %}
+    "\"Citrix Profile Management\"",
+    "\"Citrix Profile Management WMI Plug-in\""
+  {% endif %}
+  ]
+
+_ctxvda_mcs_io_driver_arguments: >-
+  [
+  {% if _ctxvda_install_mcs_io_driver %}
+    "\"Citrix MCS IODriver\""
+  {% endif %}
+  ]
+
+_ctxvda_appv_personalization_arguments: >-
+  [
+  {% if ctxvda_install_appv_personalization %}
+    "\"Citrix Personalization for App-V - VDA\""
+  {% endif %}
+  ]
+
+_ctxvda_include_additional_component_arguments: >-
+  {{ _ctxvda_rendezvous_arguments +
+     _ctxvda_vda_upgrade_agent_arguments +
+     _ctxvda_profile_management_arguments +
+     _ctxvda_mcs_io_driver_arguments +
+     _ctxvda_appv_personalization_arguments }}
+
+_ctxvda_include_additional_arguments:
+  - /includeadditional
+  - '{{ _ctxvda_include_additional_component_arguments | join(",") }}'
+
+_ctxvda_exclude_arguments: >-
+  [
+  {% if not ctxvda_install_profile_management %}
+    "/exclude",
+    "\"Citrix Profile Management\",\"Citrix Profile Management WMI Plug-in\""
+  {% endif %}
+  ]
+
+_ctxvda_mcs_arguments: >-
+  [
+  {% if ctxvda_install_type == 'mcs' %}
+    "/mastermcsimage"
+  {% endif %}
+  ]
+
+_ctxvda_pvs_arguments: >-
+  [
+  {% if ctxvda_install_type == 'pvs' %}
+    "/masterpvsimage"
+  {% endif %}
+  ]
+
+_ctxvda_remotepc_arguments: >-
+  [
+  {% if ctxvda_install_type == 'remotepc' %}
+    "/remotepc"
+  {% endif %}
+  ]
+
+_ctxvda_rendezvous_proxy_config_arguments: >-
+  [
+  {% if ctxvda_install_rendezvous and ctxvda_rendezvous_proxy_config is defined %}
+    "/proxyconfig",
+    "\"{{ ctxvda_rendezvous_proxy_config }}\""
+  {% endif %}
+  ]
+
+_ctxvda_arguments: >-
+  {{ (_ctxvda_base_arguments +
+      _ctxvda_controllers_arguments +
+      _ctxvda_enable_hdx_ports_arguments +
+      _ctxvda_enable_real_time_transport_arguments +
+      _ctxvda_enable_hdx_udp_ports_arguments +
+      _ctxvda_enable_remote_assistance_arguments +
+      _ctxvda_enable_ss_ports_arguments +
+      _ctxvda_include_additional_arguments +
+      _ctxvda_exclude_arguments +
+      _ctxvda_mcs_arguments +
+      _ctxvda_pvs_arguments +
+      _ctxvda_remotepc_arguments +
+      _ctxvda_rendezvous_proxy_config_arguments) | join(" ") }}

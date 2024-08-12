@@ -1,0 +1,36 @@
+---
+- name: Verify
+  hosts:
+    - subjects
+  gather_facts: false
+  tasks:
+    - name: Check if the VDA is installed
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+
+          $VDA = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Virtual Desktop Agent*" }))
+
+          $Ansible.Result = $VDA.Count -gt 0
+      register: _vda_installed
+
+    - name: Assert
+      ansible.builtin.assert:
+        that:
+          - _vda_installed.result
+        fail_msg: The Citrix VDA is not installed
+        success_msg: The Citrix VDA is installed
+
+    - name: Check if the Citrix Desktop Service is running
+      check_mode: true
+      ansible.windows.win_service:
+        name: BrokerAgent
+        state: started
+      register: _service_started
+
+    - name: Assert
+      ansible.builtin.assert:
+        that:
+          - not _service_started.changed
+        fail_msg: The Citrix Desktop Service is not running
+        success_msg: The Citrix Desktop Service is running

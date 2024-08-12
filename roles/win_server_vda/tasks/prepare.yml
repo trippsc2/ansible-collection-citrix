@@ -1,0 +1,72 @@
+---
+- name: Disable pagefile
+  when:
+    - _ctxvda_disable_pagefile
+  community.windows.win_pagefile:
+    automatic: false
+    remove_all: true
+    drive: C
+    state: absent
+  notify:
+    - _ctxvda_reboot
+
+- name: Flush all handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Reduce C drive permissions
+  when:
+    - ctxvda_reduce_c_drive_permissions
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+      $acl = Get-Acl -Path C:\
+
+      $accessAcl = $acl.Access
+
+      $accessAcl | ForEach-Object {
+        if ($_.IdentityReference -eq 'CREATOR OWNER') {
+          $acl.RemoveAccessRule($_)
+          $Ansible.Changed = $true
+        }
+        elseif ($_.IdentityReference -eq 'BUILTIN\Users') {
+
+          if ($_.InheritanceFlags -eq 'ContainerInherit') {
+            $acl.RemoveAccessRule($_)
+            $Ansible.Changed = $true
+          }
+        }
+      }
+
+      $acl.SetAccessRuleProtection($true, $false)
+
+      if ($Ansible.Changed) {
+        if (-Not $Ansible.CheckMode) {
+          $acl | Set-Acl -Path C:\
+        }
+      }
+
+- name: Install Remote Assistance
+  when:
+    - ctxvda_install_remote_assistance
+  ansible.windows.win_feature:
+    name:
+      - Remote-Assistance
+    state: present
+
+- name: Install Media Foundation feature
+  ansible.windows.win_feature:
+    name:
+      - Server-Media-Foundation
+    state: present
+
+- name: Install Remote Desktop Session Host
+  ansible.windows.win_feature:
+    name:
+      - Remote-Desktop-Services
+      - RDS-RD-Server
+    state: present
+  notify:
+    - _ctxvda_reboot
+
+- name: Flush all handlers
+  ansible.builtin.meta: flush_handlers

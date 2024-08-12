@@ -1,0 +1,96 @@
+---
+- name: Ensure registry is configured to delete per-user firewall rules on logoff
+  when:
+    - ctxvda_enable_deletion_of_per_user_firewall_rules
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy
+    name: DeleteUserAppContainersOnLogoff
+    data: 1
+    type: dword
+  notify:
+    - _ctxvda_reboot
+
+- name: Ensure background auto-layout is disabled
+  when:
+    - ctxvda_disable_background_auto_layout
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OptimalLayout
+    name: EnableAutoLayout
+    data: 0
+    type: dword
+  notify:
+    - _ctxvda_reboot
+
+- name: Ensure background disk defragmentation is disabled
+  when:
+    - _ctxvda_disable_background_disk_defragmentation
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction
+    name: Enable
+    data: N
+    type: string
+  notify:
+    - _ctxvda_reboot
+
+- name: Ensure memory dump creation is disabled
+  when:
+    - _ctxvda_disable_memory_dump_creation
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl
+    name: CrashDumpEnabled
+    data: 0
+    type: dword
+  notify:
+    - _ctxvda_reboot
+
+- name: Ensure NTFS last access timestamps are disabled
+  when:
+    - _ctxvda_disable_ntfs_last_access_time
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem
+    name: NtfsDisableLastAccessUpdate
+    data: 2147483649
+    type: dword
+  notify:
+    - _ctxvda_reboot
+  
+- name: Ensure hard error messages are disabled
+  when:
+    - ctxvda_disable_hard_error_messages
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\Windows
+    name: ErrorMode
+    data: 2
+    type: dword
+  notify:
+    - _ctxvda_reboot
+
+- name: Ensure disk I/O timeout is configured correctly
+  when:
+    - ctxvda_set_disk_io_timeout
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\Disk
+    name: TimeOutValue
+    data: "{{ ctxvda_disk_io_timeout_in_seconds }}"
+    type: dword
+  notify:
+    - _ctxvda_reboot
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Ensure unneeded services are stopped and disabled
+  loop: "{{ _ctxvda_disabled_services }}"
+  when:
+    - ctxvda_manage_services
+  ansible.builtin.include_tasks: disable-service.yml
+  loop_control:
+    label: "{{ item.display_name }}"
+
+- name: Ensure unneeded scheduled tasks are disabled
+  loop: "{{ _ctxvda_disabled_scheduled_tasks }}"
+  when:
+    - ctxvda_manage_scheduled_tasks
+  ansible.builtin.include_tasks: disable-scheduled-task.yml
+  loop_control:
+    label: "{{ item.name }}"

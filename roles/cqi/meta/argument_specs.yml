@@ -1,0 +1,19 @@
+---
+argument_specs:
+  main:
+    short_description: Citrix Connection Quality Indicator
+    description:
+      - This role installs Citrix Connection Quality Indicator on Windows systems.
+    author: Jim Tarpley
+    options:
+      ctxcqi_installer_path:
+        type: path
+        required: true
+        description:
+          - The path to the Citrix Connection Quality Indicator MSI installer.
+      ctxcqi_installer_log_path:
+        type: path
+        required: false
+        default: C:\Windows\Temp\CitrixCQI.log
+        description:
+          - The path to the log file for the Citrix Connection Quality Indicator installer.

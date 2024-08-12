@@ -1,0 +1,28 @@
+---
+namespace: trippsc2
+name: citrix
+version: 1.0.0
+readme: README.md
+authors:
+  - Jim Tarpley
+description: This collection contains modules and roles for installing and configuring Citrix applications.
+
+license_file: 'LICENSE'
+
+tags: []
+
+dependencies:
+  ansible.windows: '>=1.0.0'
+  community.windows: '>=1.0.0'
+
+repository: https://github.com/trippsc2/ansible-collection-citrix.git
+
+manifest:
+  directives:
+    - recursive-include roles/* *.md
+    - recursive-include roles/*/files **
+    - exclude galaxy.yml galaxy.yaml MANIFEST.json FILES.json *.tar.gz
+    - recursive-exclude tests/output **
+    - recursive-exclude roles/*/molecule **
+    - recursive-exclude molecule **
+    - global-exclude /.* /__pycache__

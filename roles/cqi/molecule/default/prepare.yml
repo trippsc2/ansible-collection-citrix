@@ -1,0 +1,16 @@
+---
+- name: Prepare
+  hosts:
+    - subjects
+  pre_tasks:
+    - name: Copy Citrix VDA installer
+      ansible.windows.win_copy:
+        src: "{{ _ctxvda_installer }}"
+        dest: "{{ ctxvda_installer_path }}"
+
+    - name: Copy Citrix CQI installer
+      ansible.windows.win_copy:
+        src: "{{ _ctxcqi_installer }}"
+        dest: "{{ ctxcqi_installer_path }}"
+  roles:
+    - role: trippsc2.citrix.win_server_vda

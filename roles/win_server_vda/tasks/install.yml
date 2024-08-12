@@ -1,0 +1,15 @@
+---
+- name: Install Citrix VDA
+  ansible.windows.win_package:
+    path: "{{ ctxvda_installer_path }}"
+    arguments: "{{ _ctxvda_arguments }}"
+    product_id: "{{ _ctxvda_product_id }}"
+    expected_return_code:
+      - 0
+      - 3
+      - 8
+      - 1641
+      - 3010
+    state: present
+  notify:
+    - _ctxvda_reboot

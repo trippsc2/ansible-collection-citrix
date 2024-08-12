@@ -1,0 +1,34 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+  cachier: machine
+  parallel: true
+platforms:
+  - name: win
+    box: jtarpley/${MOLECULE_BOX:-w2022_cis}
+    memory: 8192
+    cpus: 2
+    groups:
+      - subjects
+      - windows
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      subjects:
+        _ctxvda_version: '${MOLECULE_CITRIX_VDA_VERSION:-2407}'
+        _ctxvda_installer: "./files/VDAServerSetup_{{ _ctxvda_version }}.exe"
+        ctxvda_installer_path: "C:\\Windows\\Temp\\VDAServerSetup_{{ _ctxvda_version }}.exe"
+        ctxvda_controller_list:
+          - dc1.test.loc
+          - dc2.test.loc
+      windows:
+        ansible_shell_type: powershell
+        ansible_become_method: runas
+        ansible_become_user: SYSTEM
+verifier:
+  name: ansible

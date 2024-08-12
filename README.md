@@ -1,2 +1,2 @@
 # ansible-collection-citrix
-This collection contains modules and roles for Citrix applications.
+This collection contains modules and roles for installing and configuring Citrix applications.

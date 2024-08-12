@@ -1,0 +1,22 @@
+---
+ctxvda_reduce_c_drive_permissions: true
+ctxvda_install_remote_assistance: true
+
+ctxvda_install_type: mcs
+ctxvda_installer_log_path: C:\Windows\Temp\CitrixVDA.log
+
+ctxvda_configure_windows_firewall: true
+ctxvda_enable_real_time_transport: true
+ctxvda_enable_screen_sharing: true
+ctxvda_install_rendezvous: true
+ctxvda_install_profile_management: true
+ctxvda_install_appv_personalization: false
+
+ctxvda_enable_deletion_of_per_user_firewall_rules: true
+ctxvda_disable_background_auto_layout: true
+ctxvda_manage_services: true
+ctxvda_manage_scheduled_tasks: true
+ctxvda_disable_hard_error_messages: true
+ctxvda_set_disk_io_timeout: true
+
+ctxvda_disk_io_timeout_in_seconds: 200

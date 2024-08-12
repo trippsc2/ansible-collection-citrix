@@ -1,0 +1,328 @@
+---
+argument_specs:
+  main:
+    short_description: Citrix Virtual Delivery Agent for Multi-session OS
+    description:
+      - This role installs and configures Citrix Virtual Delivery Agent for Multi-session OS on Windows servers.
+    author: Jim Tarpley
+    options:
+      ctxvda_disable_pagefile:
+        type: bool
+        required: false
+        description:
+          - Whether to disable the pagefile on the system.
+          - If *ctxvda_install_type* is set to `remotepc`, this is defaults to `false`.
+          - Otherwise, this defaults to `true`.
+      ctxvda_reduce_c_drive_permissions:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to reduce the permissions on the C drive.
+      ctxvda_install_remote_assistance:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to install the Remote Assistance feature.
+      ctxvda_install_type:
+        type: str
+        required: false
+        default: mcs
+        choices:
+          - mcs
+          - pvs
+          - remotepc
+        description:
+          - The type of VDA installation to perform.
+      ctxvda_installer_log_path:
+        type: path
+        required: false
+        default: C:\Windows\Temp\CitrixVDA.log
+        description:
+          - Path to the installer log.
+      ctxvda_controllers:
+        type: list
+        elements: str
+        required: false
+        description:
+          - List of Delivery Controllers (or Cloud Connectors if Citrix DaaS).
+          - If not provided, the role will not configure the VDA with controllers.
+      ctxvda_configure_windows_firewall:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to configure the Windows Firewall.
+          - This takes into account optional features and components, like Real-Time Transport and Screen Sharing, if enabled.
+      ctxvda_enable_real_time_transport:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable Real-Time Transport.
+      ctxvda_enable_screen_sharing:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable Screen Sharing.
+      ctxvda_install_rendezvous:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to install **Citrix Rendezvous V2**.
+      ctxvda_install_vda_upgrade_agent:
+        type: bool
+        required: false
+        description:
+          - Whether to install the **Citrix VDA Upgrade Agent**.
+          - If *ctxvda_install_type* is set to `remotepc`, this defaults to `true`.
+          - Otherwise, this defaults to `false`.
+      ctxvda_install_profile_management:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to install **Citrix Profile Management** and **Citrix Profile Management WMI Plug-in**.
+      ctxvda_install_mcs_io_driver:
+        type: bool
+        required: false
+        description:
+          - Whether to install **Citrix MCS IODriver**.
+          - If *ctxvda_install_type* is set to `mcs`, this defaults to `true`.
+          - Otherwise, this defaults to `false`.
+      ctxvda_install_appv_personalization:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to install **Citrix Personalization for App-V - VDA**.
+      ctxvda_rendezvous_proxy_config:
+        type: str
+        required: false
+        description:
+          - Configuration for Rendezvous Proxy.
+          - The configuration should either be a URL in `<protocol>://<host>:<port>` format or a URL path to a `.pac` file.
+          - If *ctxvda_install_rendezvous_proxy* is `false`, this is ignored.
+      ctxvda_enable_deletion_of_per_user_firewall_rules:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable the deletion of per-user firewall rules.
+      ctxvda_disable_background_auto_layout:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to disable background auto layout.
+      ctxvda_disable_background_disk_defragmentation:
+        type: bool
+        required: false
+        description:
+          - Whether to disable background disk defragmentation.
+          - If *ctxvda_install_type* is set to `remotepc`, this defaults to `false`.
+          - Otherwise, this defaults to `true`.
+      ctxvda_disable_memory_dump_creation:
+        type: bool
+        required: false
+        description:
+          - Whether to disable memory dump creation.
+          - If *ctxvda_install_type* is set to `remotepc`, this defaults to `false`.
+          - Otherwise, this defaults to `true`.
+      ctxvda_disable_ntfs_last_access_time:
+        type: bool
+        required: false
+        description:
+          - Whether to disable NTFS last access time.
+          - If *ctxvda_install_type* is set to `remotepc`, this defaults to `false`.
+          - Otherwise, this defaults to `true`.
+      ctxvda_disable_hard_error_messages:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to disable hard error messages.
+      ctxvda_set_disk_io_timeout:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to set disk I/O timeout.
+      ctxvda_disk_io_timeout_in_seconds:
+        type: int
+        required: false
+        default: 200
+        description:
+          - Disk I/O timeout in seconds.
+          - If *ctxvda_set_disk_io_timeout* is `false`, this value is ignored.
+      ctxvda_manage_services:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to manage the Citrix services.
+      ctxvda_disabled_services:
+        type: list
+        elements: dict
+        required: false
+        default:
+          - display_name: AllJoyn Router Service
+            name: AJRouter
+          - display_name: Application Layer Gateway Service
+            name: ALG
+          - display_name: Bluetooth Audio Gateway Service
+            name: BTAGService
+          - display_name: Bluetooth Support Service
+            name: bthserv
+          - display_name: Diagnostic Policy Service
+            name: DPS
+          - display_name: Diagnostic Service Host
+            name: WdiServiceHost
+          - display_name: Diagnostic System Host
+            name: WdiSystemHost
+          - display_name: Downloaded Maps Manager
+            name: MapsBroker
+          - display_name: Encrypting File System (EFS)
+            name: EFS
+          - display_name: Function Discovery Provider Host
+            name: fdPHost
+          - display_name: Function Discovery Resource Publication
+            name: FDResPub
+          - display_name: Internet Connection Sharing (ICS)
+            name: SharedAccess
+          - display_name: Offline Files
+            name: CscService
+          - display_name: Payments and NFC/SE Manager
+            name: SEMgrSvc
+          - display_name: Secure Socket Tunneling Protocol Service
+            name: SstpSvc
+          - display_name: Sensor Monitoring Service
+            name: SensrSvc
+          - display_name: Shared PC Account Manager
+            name: shpamsvc
+          - display_name: SSDP Discovery
+            name: SSDPSRV
+          - display_name: UPnP Device Host
+            name: upnphost
+          - display_name: Windows Media Player Network Sharing Service
+            name: WMPNetworkSvc
+          - display_name: Windows Mobile Hotspot Service
+            name: icssvc
+          - display_name: Superfetch
+            name: SysMain
+          - display_name: Windows Error Reporting Service
+            name: WerSvc
+        description:
+          - List of services to disable.
+          - If `ctxvda_install_type` is set to `remotepc`, the `Superfetch` service is removed from the default value.
+        options:
+          display_name:
+            type: str
+            required: true
+            description:
+              - Display name of the service.
+          name:
+            type: str
+            required: true
+            description:
+              - Name of the service.
+      ctxvda_manage_scheduled_tasks:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to manage the Citrix scheduled tasks.
+      ctxvda_disabled_scheduled_tasks:
+        type: list
+        elements: dict
+        required: false
+        default:
+          - name: AnalyzeSystem
+            path: \Microsoft\Windows\Power Efficiency Diagnostics
+          - name: BfeOnServiceStartTypeChange
+            path: \Microsoft\Windows\Windows Filtering Platform
+          - name: Consolidator
+            path: \Microsoft\Windows\Customer Experience Improvement Program
+          - name: CreateObjectTask
+            path: \Microsoft\Windows\Shell
+          - name: IndexerAutomaticMaintenance
+            path: \Microsoft\Windows\Shell
+          - name: MapsToastTask
+            path: \Microsoft\Windows\Maps
+          - name: Microsoft Compatibility Appraiser
+            path: \Microsoft\Windows\Application Experience
+          - name: Microsoft-Windows-DiskDiagnosticDataCollector
+            path: \Microsoft\Windows\DiskDiagnostic
+          - name: Microsoft-Windows-DiskDiagnosticResolver
+            path: \Microsoft\Windows\DiskDiagnostic
+          - name: MNO Metadata Parser
+            path: \Microsoft\Windows\Mobile Broadband Accounts
+          - name: MobilityManager
+            path: \Microsoft\Windows\Ras
+          - name: Notifications
+            path: \Microsoft\Windows\Location
+          - name: ProactiveScan
+            path: \Microsoft\Windows\Chkdsk
+          - name: ProcessMemoryDiagnosticEvents
+            path: \Microsoft\Windows\MemoryDiagnostic
+          - name: ProgramDataUpdater
+            path: \Microsoft\Windows\Application Experience
+          - name: Proxy
+            path: \Microsoft\Windows\Autochk
+          - name: QueueReporting
+            path: \Microsoft\Windows\Windows Error Reporting
+          - name: RegIdleBackup
+            path: \Microsoft\Windows\Registry
+          - name: ResolutionHost
+            path: \Microsoft\Windows\WDI
+          - name: RunFullMemoryDiagnostic
+            path: \Microsoft\Windows\MemoryDiagnostic
+          - name: Scheduled
+            path: \Microsoft\Windows\Diagnosis
+          - name: ScheduledDefrag
+            path: \Microsoft\Windows\Defrag
+          - name: ServerManager
+            path: \Microsoft\Windows\Server Manager
+          - name: StartComponentCleanup
+            path: \Microsoft\Windows\Servicing
+          - name: StartupAppTask
+            path: \Microsoft\Windows\Application Experience
+          - name: TPM-Maintenance
+            path: \Microsoft\Windows\TPM
+          - name: UninstallDeviceTask
+            path: \Microsoft\Windows\Bluetooth
+          - name: UPnPHostConfig
+            path: \Microsoft\Windows\UPnP
+          - name: UsbCeip
+            path: \Microsoft\Windows\Customer Experience Improvement Program
+          - name: VerifyWinRE
+            path: \Microsoft\Windows\RecoveryEnvironment
+          - name: Windows Defender Cache Maintenance
+            path: \Microsoft\Windows\Windows Defender
+          - name: Windows Defender Cleanup
+            path: \Microsoft\Windows\Windows Defender
+          - name: Windows Defender Verification
+            path: \Microsoft\Windows\Windows Defender
+          - name: UpdateLibrary
+            path: \Microsoft\Windows\Windows Media Sharing
+          - name: WinSAT
+            path: \Microsoft\Windows\Maintenance
+          - name: Recovery-Check
+            path: \Microsoft\Windows\Workplace Join
+        description:
+          - List of scheduled tasks to disable.
+          - If `ctxvda_install_type` is set to `remotepc`, the `Microsoft-Windows-DiskDiagnosticResolver`, `RegIdleBackup`, and `ScheduledDefrag` tasks are removed from the default value.
+        options:
+          name:
+            type: str
+            required: true
+            description:
+              - Name of the scheduled task.
+          path:
+            type: str
+            required: true
+            description:
+              - Path of the scheduled task.
