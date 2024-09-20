@@ -12,6 +12,8 @@ platforms:
     box: jtarpley/${MOLECULE_BOX:-w2022_cis}
     memory: 8192
     cpus: 2
+    provider_options:
+      default_prefix: citrix_cqi_
     groups:
       - subjects
       - windows

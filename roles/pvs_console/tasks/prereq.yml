@@ -1,0 +1,12 @@
+---
+- name: Install prerequisite with Chocolatey
+  chocolatey.chocolatey.win_chocolatey:
+    name:
+      - "{{ _ctxpvs_console_prerequisite }}"
+    state: present
+  register: _ctxpvs_console_prerequisite_result
+
+- name: Reboot if required
+  when:
+    - _ctxpvs_console_prerequisite_result.rc == 3010
+  ansible.windows.win_reboot:

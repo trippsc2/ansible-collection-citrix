@@ -1,0 +1,9 @@
+---
+- name: Prepare
+  hosts:
+    - subjects
+  tasks:
+    - name: Copy Citrix PVS Target Device installer
+      ansible.windows.win_copy:
+        src: "{{ _ctxpvs_target_installer_source }}"
+        dest: "{{ ctxpvs_target_installer_path }}"

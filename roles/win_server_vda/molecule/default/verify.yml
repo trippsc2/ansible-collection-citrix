@@ -14,12 +14,12 @@
           $Ansible.Result = $VDA.Count -gt 0
       register: _vda_installed
 
-    - name: Assert
+    - name: Verify that the VDA is installed
       ansible.builtin.assert:
         that:
           - _vda_installed.result
-        fail_msg: The Citrix VDA is not installed
-        success_msg: The Citrix VDA is installed
+        fail_msg: The Citrix VDA is not installed.
+        success_msg: The Citrix VDA is installed.
 
     - name: Check if the Citrix Desktop Service is running
       check_mode: true
@@ -28,9 +28,9 @@
         state: started
       register: _service_started
 
-    - name: Assert
+    - name: Verify that the Citrix Desktop Service is running
       ansible.builtin.assert:
         that:
           - not _service_started.changed
-        fail_msg: The Citrix Desktop Service is not running
-        success_msg: The Citrix Desktop Service is running
+        fail_msg: The Citrix Desktop Service is not running.
+        success_msg: The Citrix Desktop Service is running.

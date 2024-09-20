@@ -1,0 +1,19 @@
+---
+- name: Install prerequisites
+  loop: "{{ _ctxpvs_target_prerequisites }}"
+  ansible.builtin.include_tasks: prereq.yml
+  loop_control:
+    loop_var: _ctxpvs_target_prerequisite
+
+- name: Install Citrix Provisioning Target Device software
+  ansible.windows.win_package:
+    path: "{{ ctxpvs_target_installer_path }}"
+    arguments: "/s /v\"/qn REBOOT=SUPPRESS\""
+    product_id: "{{ _ctxpvs_target_product_id }}"
+    state: present
+  register: _ctxpvs_target_install_result
+
+- name: Reboot if required
+  when:
+    - _ctxpvs_target_install_result.rc == 3010
+  ansible.windows.win_reboot:

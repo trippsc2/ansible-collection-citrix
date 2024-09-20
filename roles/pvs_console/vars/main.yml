@@ -1,0 +1,42 @@
+---
+_ctxpvs_console_version_by_checksum:
+  2f89bcb3075f0cecd9fdf680c527186d28a911d1: 2407
+  020f9cd3ee0aad0eb825d993408df01f4eb741f5: 2402
+  7cbdcb166ebf7dbf7c3a579c740c94fae8e0ddde: 2311
+  e140ffd17e1224d708ba0419c69810f6beaa31a6: 2308
+  09caefa858f283b53f4afdedfb37016da74480b5: 2305
+  a3be0c39cf546442c5fd2d4d449597e4965f5dc8: 2303
+
+_ctxpvs_console_prerequisites_by_checksum:
+  2f89bcb3075f0cecd9fdf680c527186d28a911d1:
+    - azurepowershell
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
+  020f9cd3ee0aad0eb825d993408df01f4eb741f5:
+    - azurepowershell
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
+  7cbdcb166ebf7dbf7c3a579c740c94fae8e0ddde:
+    - azurepowershell
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
+  e140ffd17e1224d708ba0419c69810f6beaa31a6:
+    - azurepowershell
+    - dotnetfx
+  09caefa858f283b53f4afdedfb37016da74480b5:
+    - azurepowershell
+    - dotnetfx
+  a3be0c39cf546442c5fd2d4d449597e4965f5dc8:
+    - azurepowershell
+    - dotnetfx
+
+_ctxpvs_console_product_id_by_checksum:
+  2f89bcb3075f0cecd9fdf680c527186d28a911d1: '{4D794CB5-1A20-4ACA-9502-CA57682F4519}'
+  020f9cd3ee0aad0eb825d993408df01f4eb741f5: '{03600FF7-AD2D-4E16-B23A-B48B2AC46FA4}'
+  7cbdcb166ebf7dbf7c3a579c740c94fae8e0ddde: '{53914CD2-35BB-4235-AD25-F0B59445EE80}'
+  e140ffd17e1224d708ba0419c69810f6beaa31a6: '{C4626305-8945-4ADC-80A2-6D54188C59E4}'
+  09caefa858f283b53f4afdedfb37016da74480b5: '{C3365B5E-5878-43D0-A0F9-54C7820D115D}'
+  a3be0c39cf546442c5fd2d4d449597e4965f5dc8: '{CE022533-E311-4D42-B675-285920C32273}'

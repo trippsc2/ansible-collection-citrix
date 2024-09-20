@@ -1,0 +1,13 @@
+---
+argument_specs:
+  main:
+    short_description: Citrix Provisioning Console
+    description:
+      - This role installs the Citrix Provisioning Console on Windows systems.
+    author: Jim Tarpley
+    options:
+      ctxpvs_console_installer_path:
+        type: path
+        required: true
+        description:
+          - The path to the Citrix Provisioning Console installer.

@@ -1,0 +1,26 @@
+---
+- name: Install prerequisites
+  loop: "{{ _ctxpvs_server_prerequisites }}"
+  ansible.builtin.include_tasks: prereq.yml
+  loop_control:
+    loop_var: _ctxpvs_server_prerequisite
+
+- name: Stop Citrix Provisioning Stream Service
+  when:
+    - _ctxpvs_server_needs_upgrade
+  ansible.windows.win_service:
+    name: StreamService
+    state: stopped
+
+- name: Install Citrix Provisioning Server
+  ansible.windows.win_package:
+    path: "{{ ctxpvs_server_installer_path }}"
+    arguments: "/s /v\"/qn REBOOT=SUPPRESS\""
+    product_id: "{{ _ctxpvs_server_product_id }}"
+    state: present
+  register: _ctxpvs_server_install_result
+
+- name: Reboot if required
+  when:
+    - _ctxpvs_server_install_result.rc == 3010
+  ansible.windows.win_reboot:

@@ -1,0 +1,6 @@
+---
+- name: Install Citrix CQI
+  ansible.windows.win_package:
+    path: "{{ ctxcqi_installer_path }}"
+    log_path: "{{ ctxcqi_installer_log_path }}"
+    state: present

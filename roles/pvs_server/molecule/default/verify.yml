@@ -1,0 +1,39 @@
+---
+- name: Verify
+  hosts:
+    - subjects
+  gather_facts: false
+  tasks:
+    - name: Check if the PVS Console is installed
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+
+          $PVSConsole = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Provisioning Console*" }))
+
+          $Ansible.Result = $PVSConsole.Count -gt 0
+      register: _pvs_console_installed
+
+    - name: Verify that the PVS Console is installed
+      ansible.builtin.assert:
+        that:
+          - _pvs_console_installed.result
+        fail_msg: The Citrix PVS Console is not installed.
+        success_msg: The Citrix PVS Console is installed.
+
+    - name: Check if the PVS Server is installed
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+
+          $PVSServer = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Provisioning Server*" }))
+
+          $Ansible.Result = $PVSServer.Count -gt 0
+      register: _pvs_server_installed
+
+    - name: Verify that the PVS Server is installed
+      ansible.builtin.assert:
+        that:
+          - _pvs_server_installed.result
+        fail_msg: The Citrix PVS Server is not installed.
+        success_msg: The Citrix PVS Server is installed.

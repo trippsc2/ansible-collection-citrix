@@ -18,5 +18,5 @@
       ansible.builtin.assert:
         that:
           - _vda_installed.result
-        fail_msg: The Citrix CQI is not installed
-        success_msg: The Citrix CQI is installed
+        fail_msg: The Citrix CQI is not installed.
+        success_msg: The Citrix CQI is installed.

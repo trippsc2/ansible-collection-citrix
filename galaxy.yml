@@ -13,6 +13,7 @@ tags: []
 
 dependencies:
   ansible.windows: '>=1.0.0'
+  chocolatey.chocolatey: '>=1.0.0'
   community.windows: '>=1.0.0'
 
 repository: https://github.com/trippsc2/ansible-collection-citrix.git

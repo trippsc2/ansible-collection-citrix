@@ -1,0 +1,60 @@
+---
+_ctxpvs_server_version_by_checksum:
+  ca539cddd3fb6db8b14f359d9ee414be864d21fe: 2407
+  d781459a7f371a5d1e363a9b9da874e83d8690be: 2402
+  c935189756e77dfbd87f8a2d0a2258beeec18f9c: 2311
+  48284aec164076afcdf13ba3faaaa8c5ed05b35a: 2308
+  9b34e5e9531a6dc35df6711e9aa05bdb0edd4c53: 2305
+  070acd01034f4b80a94a5bc83da7ae72092d42e7: 2303
+
+_ctxpvs_server_prerequisites_by_checksum:
+  ca539cddd3fb6db8b14f359d9ee414be864d21fe:
+    - azurepowershell
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
+    - msoledbsql
+  d781459a7f371a5d1e363a9b9da874e83d8690be:
+    - azurepowershell
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
+    - msoledbsql
+  c935189756e77dfbd87f8a2d0a2258beeec18f9c:
+    - azurepowershell
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
+    - msoledbsql
+  48284aec164076afcdf13ba3faaaa8c5ed05b35a:
+    - azurepowershell
+    - dotnetfx
+  9b34e5e9531a6dc35df6711e9aa05bdb0edd4c53:
+    - azurepowershell
+    - dotnetfx
+  070acd01034f4b80a94a5bc83da7ae72092d42e7:
+    - azurepowershell
+    - dotnetfx
+
+_ctxpvs_server_product_id_by_checksum:
+  ca539cddd3fb6db8b14f359d9ee414be864d21fe: '{FEB29051-3956-408F-B0E9-FC11AA879B33}'
+  d781459a7f371a5d1e363a9b9da874e83d8690be: '{8567F314-0CA3-4744-88DC-5B5D7451BCF3}'
+  c935189756e77dfbd87f8a2d0a2258beeec18f9c: '{488B1DD8-B35D-4C89-80F7-A24419D2E00E}'
+  48284aec164076afcdf13ba3faaaa8c5ed05b35a: '{2D7E64CB-9536-47BA-B331-F5DD736882D3}'
+  9b34e5e9531a6dc35df6711e9aa05bdb0edd4c53: '{7EB67212-B1E5-4A89-A763-0AB105E2D979}'
+  070acd01034f4b80a94a5bc83da7ae72092d42e7: '{AF33090A-06CF-413F-8D6B-8D4AC1178405}'
+
+_ctxpvs_ip_service_type_values:
+  microsoft_dhcp: 0
+  citrix_bootp: 1
+  other: 2
+
+_ctxpvs_pxe_service_type_values:
+  citrix_pxe: 1
+  other: 0
+
+_ctxpvs_ip_service_type: >-
+  {{ _ctxpvs_ip_service_type_values[ctxpvs_ip_service_type] }}
+
+_ctxpvs_pxe_service_type: >-
+  {{ _ctxpvs_pxe_service_type_values[ctxpvs_pxe_service_type] }}

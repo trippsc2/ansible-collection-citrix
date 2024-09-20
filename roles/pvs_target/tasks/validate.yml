@@ -1,0 +1,42 @@
+---
+- name: Gather OS facts
+  when:
+    - ansible_distribution is not defined or
+      ansible_os_family is not defined
+  ansible.builtin.setup:
+    gather_subset:
+      - '!all'
+      - '!min'
+      - distribution
+      - os_family
+
+- name: Validate OS
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == 'Windows'
+    fail_msg: "This role only supports Windows.  {{ ansible_distribution }} is not supported."
+    success_msg: "This role supports {{ ansible_distribution }}."
+
+- name: Get installer info
+  ansible.windows.win_stat:
+    path: "{{ ctxpvs_target_installer_path }}"
+  register: _ctxpvs_target_installer_info
+
+- name: Validate installer exists
+  ansible.builtin.assert:
+    that:
+      - _ctxpvs_target_installer_info.stat.exists
+    fail_msg: "The installer file '{{ ctxpvs_target_installer_path }}' does not exist."
+    success_msg: "The installer file '{{ ctxpvs_target_installer_path }}' exists."
+
+- name: Validate installer is from a supported version
+  ansible.builtin.assert:
+    that:
+      - _ctxpvs_target_installer_info.stat.checksum in _ctxpvs_target_version_by_checksum.keys()
+    fail_msg: "The installer file '{{ ctxpvs_target_installer_path }}' is not from a supported version. Supported versions are between 2303 and 2407."
+    success_msg: "The installer file '{{ ctxpvs_target_installer_path }}' is for version '{{ _ctxpvs_target_version_by_checksum[_ctxpvs_target_installer_info.stat.checksum] }}' which is supported."
+
+- name: Set version-specific variables
+  ansible.builtin.set_fact:
+    _ctxpvs_target_product_id: "{{ _ctxpvs_target_product_id_by_checksum[_ctxpvs_target_installer_info.stat.checksum] }}"
+    _ctxpvs_target_prerequisites: "{{ _ctxpvs_target_prerequisites_by_checksum[_ctxpvs_target_installer_info.stat.checksum] }}"

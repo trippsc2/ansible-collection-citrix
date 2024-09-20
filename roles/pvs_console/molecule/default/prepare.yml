@@ -1,0 +1,9 @@
+---
+- name: Prepare
+  hosts:
+    - subjects
+  tasks:
+    - name: Copy Citrix PVS Console installer
+      ansible.windows.win_copy:
+        src: "{{ _ctxpvs_console_installer_source }}"
+        dest: C:\Windows\Temp\

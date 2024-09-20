@@ -1,0 +1,81 @@
+---
+- name: Gather OS facts
+  when:
+    - ansible_distribution is not defined or
+      ansible_os_family is not defined
+  ansible.builtin.setup:
+    gather_subset:
+      - '!all'
+      - '!min'
+      - distribution
+      - os_family
+
+- name: Validate OS
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == 'Windows'
+    fail_msg: "This role only supports Windows.  {{ ansible_distribution }} is not supported."
+    success_msg: "This role supports {{ ansible_distribution }}."
+
+- name: Get installer info
+  ansible.windows.win_stat:
+    path: "{{ ctxpvs_server_installer_path }}"
+  register: _ctxpvs_server_installer_info
+
+- name: Validate installer exists
+  ansible.builtin.assert:
+    that:
+      - _ctxpvs_server_installer_info.stat.exists
+    fail_msg: "The installer file '{{ ctxpvs_server_installer_path }}' does not exist."
+    success_msg: "The installer file '{{ ctxpvs_server_installer_path }}' exists."
+
+- name: Validate installer is from a supported version
+  ansible.builtin.assert:
+    that:
+      - _ctxpvs_server_installer_info.stat.checksum in _ctxpvs_server_version_by_checksum.keys()
+    fail_msg: "The installer file '{{ ctxpvs_server_installer_path }}' is not from a supported version. Supported versions are between 2303 and 2407."
+    success_msg: "The installer file '{{ ctxpvs_server_installer_path }}' is for version '{{ _ctxpvs_server_version_by_checksum[_ctxpvs_server_installer_info.stat.checksum] }}' which is supported."
+
+- name: Set version-specific variables
+  ansible.builtin.set_fact:
+    _ctxpvs_server_prerequisites: "{{ _ctxpvs_server_prerequisites_by_checksum[_ctxpvs_server_installer_info.stat.checksum] }}"
+    _ctxpvs_server_product_id: "{{ _ctxpvs_server_product_id_by_checksum[_ctxpvs_server_installer_info.stat.checksum] }}"
+
+- name: Check if any version of Citrix Provisioning Server is installed
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Changed = $false
+
+      $PVSServer = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Provisioning Server*" }))
+
+      $Ansible.Result = $PVSServer.Count -gt 0
+  register: _ctxpvs_server_installed_check
+
+- name: Check if this verison of Citrix Provisioning Server is installed
+  ansible.windows.win_reg_stat:
+    path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{{ _ctxpvs_server_product_id }}"
+  register: _ctxpvs_server_version_check
+
+- name: Check if Citrix Provisioning Server is configured
+  ansible.windows.win_reg_stat:
+    path: HKLM:\SOFTWARE\Citrix\ProvisioningServices\Database
+    name: Database
+  register: _ctxpvs_database_registry
+
+- name: Set variables based on installation status
+  ansible.builtin.set_fact:
+    _ctxpvs_server_needs_upgrade: >-
+      {{ _ctxpvs_server_installed_check.result and not _ctxpvs_server_version_check.exists }}
+    _ctxpvs_server_needs_install: >-
+      {{ not _ctxpvs_server_installed_check.result }}
+    _ctxpvs_server_is_configured: >-
+      {{ _ctxpvs_database_registry.exists }}
+
+- name: Validate PXE service type is defined
+  when:
+    - ctxpvs_ip_service_type | default('') != 'citrix_bootp'
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_pxe_service_type is defined
+    fail_msg: "The PXE service type must be defined when the IP service type is not 'citrix_bootp'."
+    success_msg: The PXE service type is defined.

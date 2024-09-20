@@ -13,7 +13,7 @@ platforms:
     memory: 8192
     cpus: 2
     provider_options:
-      default_prefix: citrix_win_server_vda_
+      default_prefix: citrix_pvs_server_
     groups:
       - subjects
       - windows
@@ -22,12 +22,11 @@ provisioner:
   inventory:
     group_vars:
       subjects:
-        _ctxvda_version: '${MOLECULE_CITRIX_VDA_VERSION:-2407}'
-        _ctxvda_installer: "./files/VDAServerSetup_{{ _ctxvda_version }}.exe"
-        ctxvda_installer_path: "C:\\Windows\\Temp\\VDAServerSetup_{{ _ctxvda_version }}.exe"
-        ctxvda_controller_list:
-          - dc1.test.loc
-          - dc2.test.loc
+        _ctxpvs_version: ${MOLECULE_CITRIX_PVS_VERSION:-2407}
+        _ctxpvs_installer_source: "./files/{{ _ctxpvs_version }}"
+        ctxpvs_console_installer_path: "C:\\Windows\\Temp\\{{ _ctxpvs_version }}\\Console\\PVS_Console_x64.exe"
+        ctxpvs_server_installer_path: "C:\\Windows\\Temp\\{{ _ctxpvs_version }}\\Server\\PVS_Server_x64.exe"
+        ctxpvs_pxe_service_type: other
       windows:
         ansible_shell_type: powershell
         ansible_become_method: runas

@@ -1,0 +1,46 @@
+---
+argument_specs:
+  main:
+    short_description: Citrix Provisioning Server
+    description:
+      - This role installs the Citrix Provisioning Server software on Windows servers.
+    author: Jim Tarpley
+    options:
+      ctxpvs_server_installer_path:
+        type: path
+        required: true
+        description:
+          - The path to the Citrix Provisioning Server installer executable.
+      ctxpvs_ip_service_type:
+        type: str
+        required: false
+        choices:
+          - microsoft_dhcp
+          - citrix_bootp
+          - other
+        description:
+          - The type of local service that provides IP addresses to target devices.
+          - If not defined, another service must provide IP addresses to target devices.
+          - If set to 'microsoft_dhcp', the role will use the Microsoft DHCP service on this server.
+          - If set to 'citrix_bootp', the role will use the Citrix BootP service on this server.
+          - If set to 'other', the role will rely on a third-party service on this server.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_pxe_service_type:
+        type: str
+        required: false
+        choices:
+          - citrix_pxe
+          - other
+        description:
+          - The type of local service that provides PXE boot services to target devices.
+          - If *ctxpvs_ip_service_type* is set to 'citrix_bootp', this value is ignored and will be treated as 'citrix_pxe'.
+          - Otherwise, this is required.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_first_farm_server:
+        type: bool
+        required: false
+        default: false
+        description:
+          - If the role performs a fresh install, this will indicate to the configuration wizard whether this server is creating a new farm.
+          - If the role performs an upgrade, the older farm configuration will be preserved.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
