@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
 # Ansible Role: trippsc2.citrix.pvs_server
-Version: 1.0.0
+Version: 1.0.1
 
 This role installs the Citrix Provisioning Server software on Windows servers.
 

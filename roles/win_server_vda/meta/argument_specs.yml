@@ -6,6 +6,11 @@ argument_specs:
       - This role installs and configures Citrix Virtual Delivery Agent for Multi-session OS on Windows servers.
     author: Jim Tarpley
     options:
+      ctxvda_installer_path:
+        type: path
+        required: true
+        description:
+          - Path to the VDA installer.
       ctxvda_disable_pagefile:
         type: bool
         required: false
