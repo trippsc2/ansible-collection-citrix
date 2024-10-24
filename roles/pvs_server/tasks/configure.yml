@@ -1,1 +1,27 @@
 ---
+- name: Create ProgramData PVS folder
+  ansible.windows.win_file:
+    path: C:\ProgramData\Citrix\Provisioning Services
+    state: directory
+
+- name: Create answer file
+  ansible.windows.win_template:
+    src: ConfigWizard.ans.j2
+    dest: C:\ProgramData\Citrix\Provisioning Services\ConfigWizard.ans
+    output_encoding: utf-16-le
+
+# This step requires password authentication or Kerberos delegation to function
+- name: Run PVS ConfigWizard
+  ansible.windows.win_powershell:
+    script: |
+      Start-Process -FilePath "C:\Program Files\Citrix\Provisioning Services\ConfigWizard.exe" -ArgumentList "/a" -Wait
+
+- name: Wait for PVS ConfigWizard to complete
+  delegate_to: localhost
+  ansible.builtin.wait_for:
+    host: "{{ ansible_host }}"
+    port: "{{ ctxpvs_soap_port }}"
+    delay: 5
+    connect_timeout: 5
+    timeout: 600
+    state: started

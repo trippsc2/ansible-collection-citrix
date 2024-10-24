@@ -23,7 +23,7 @@ provisioner:
     group_vars:
       subjects:
         _ctxvda_version: '${MOLECULE_CITRIX_VDA_VERSION:-2407}'
-        _ctxvda_installer: "./files/VDAServerSetup_{{ _ctxvda_version }}.exe"
+        _ctxvda_installer: "../../../../files/server_vda/VDAServerSetup_{{ _ctxvda_version }}.exe"
         ctxvda_installer_path: "C:\\Windows\\Temp\\VDAServerSetup_{{ _ctxvda_version }}.exe"
         ctxvda_controller_list:
           - dc1.test.loc

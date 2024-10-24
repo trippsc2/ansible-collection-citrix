@@ -10,10 +10,10 @@ driver:
 platforms:
   - name: win
     box: jtarpley/${MOLECULE_BOX:-w2022_cis}
-    memory: 8192
+    memory: 4096
     cpus: 2
     provider_options:
-      default_prefix: citrix_pvs_console_
+      default_prefix: citrix_licensing_
     groups:
       - subjects
       - windows
@@ -22,9 +22,7 @@ provisioner:
   inventory:
     group_vars:
       subjects:
-        _ctxpvs_version: ${MOLECULE_CITRIX_PVS_VERSION:-2407}
-        _ctxpvs_console_installer_source: "../../../../files/pvs_console/{{ _ctxpvs_version }}"
-        ctxpvs_console_installer_path: "C:\\Windows\\Temp\\pvs_console\\{{ _ctxpvs_version }}\\PVS_Console_x64.exe"
+        ctxlic_installer_path: C:\Windows\Temp\licensing\CTX_Licensing.msi
       windows:
         ansible_shell_type: powershell
         ansible_become_method: runas

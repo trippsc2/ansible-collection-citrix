@@ -8,28 +8,97 @@ driver:
   cachier: machine
   parallel: true
 platforms:
-  - name: win
-    box: jtarpley/${MOLECULE_BOX:-w2022_cis}
-    memory: 8192
+  - name: dc
+    box: jtarpley/w2022_cis
+    memory: 2048
     cpus: 2
+    groups:
+      - windows
+      - windows_domain
     provider_options:
       default_prefix: citrix_pvs_server_
+  - name: mssql
+    box: jtarpley/w2022_cis
+    memory: 4096
+    cpus: 2
+    groups:
+      - windows
+      - windows_domain
+      - windows_domain_members
+    provider_options:
+      default_prefix: citrix_pvs_server_
+  - name: win
+    box: jtarpley/${MOLECULE_BOX:-w2022_cis}
+    memory: 4096
+    cpus: 2
     groups:
       - subjects
       - windows
+      - windows_domain
+      - windows_domain_members
+    provider_options:
+      default_prefix: citrix_pvs_server_
 provisioner:
   name: ansible
   inventory:
     group_vars:
+      all:
+        mssql_sa_password: SecurePassword123!
       subjects:
         _ctxpvs_version: ${MOLECULE_CITRIX_PVS_VERSION:-2407}
-        _ctxpvs_installer_source: "./files/{{ _ctxpvs_version }}"
-        ctxpvs_console_installer_path: "C:\\Windows\\Temp\\{{ _ctxpvs_version }}\\Console\\PVS_Console_x64.exe"
-        ctxpvs_server_installer_path: "C:\\Windows\\Temp\\{{ _ctxpvs_version }}\\Server\\PVS_Server_x64.exe"
+        _ctxpvs_console_installer_source: "../../../../files/pvs_console/{{ _ctxpvs_version }}"
+        _ctxpvs_server_installer_source: "../../../../files/pvs_server/{{ _ctxpvs_version }}"
+        _ctxpvs_licensing_installer_source: "../../../../files/licensing"
+        ctxpvs_console_installer_path: "C:\\Windows\\Temp\\pvs_console\\{{ _ctxpvs_version }}\\PVS_Console_x64.exe"
+        ctxpvs_server_installer_path: "C:\\Windows\\Temp\\pvs_server\\{{ _ctxpvs_version }}\\PVS_Server_x64.exe"
+        ctxlic_installer_path: "C:\\Windows\\Temp\\licensing\\CTX_Licensing.msi"
         ctxpvs_pxe_service_type: other
+        ctxpvs_first_farm_server: true
+        ctxpvs_database_server: MSSQL
+        ctxpvs_database_name: PVS
+        ctxpvs_database_authentication: sql
+        ctxpvs_database_username: sa
+        ctxpvs_database_password: "{{ mssql_sa_password }}"
+        ctxpvs_database_admin_authentication: sql
+        ctxpvs_database_admin_username: sa
+        ctxpvs_database_admin_password: "{{ mssql_sa_password }}"        
+        ctxpvs_farm_name: TEST
+        ctxpvs_site_name: TEST
+        ctxpvs_collection_name: TEST
+        ctxpvs_store_name: TEST
+        ctxpvs_default_store_path: C:\PVS
+        ctxpvs_ad_admin_group: test.loc/Users/Domain Admins
+        ctxpvs_license_server: WIN
+        ctxpvs_license_server_port: 27000
+        ctxpvs_use_cloud_licenses: false
+        ctxpvs_use_network_service_account: true
+        ctxpvs_stream_adapter_ip_addresses:
+          - "{{ ansible_host }}"
+        ctxpvs_mgmt_ip_address: "{{ ansible_host }}"
+        ctxpvs_stream_servers:
+          - ip_address: "{{ ansible_host }}"
+            subnet_mask: '255.255.255.0'
       windows:
         ansible_shell_type: powershell
         ansible_become_method: runas
         ansible_become_user: SYSTEM
+        ansible_password: vagrant
+    host_vars:
+      mssql:
+        ansible_user: TEST\vagrant
+        _mssql_setup_source_path: ../../../../files/mssql
+        mssql_vault_manage_sa_password: false
+        mssql_configure_monitoring: false
+        mssql_vault_manage_monitoring_credentials: false
+        mssql_vault_configure_database_connection: false
+        mssql_install_database_engine: true
+        mssql_version: '2022'
+        mssql_setup_path: C:\Windows\temp\mssql
+        mssql_database_sysadmin_accounts:
+          - TEST\vagrant
+        mssql_skip_reboot: false
+      win:
+        ansible_user: TEST\vagrant
+        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
 verifier:
   name: ansible

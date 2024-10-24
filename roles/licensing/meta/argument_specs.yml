@@ -1,0 +1,52 @@
+---
+argument_specs:
+  main:
+    short_description: Citrix Licensing
+    description:
+      - This role installs the Citrix Licensing server on Windows systems.
+    author: Jim Tarpley
+    options:
+      ctxlic_installer_path:
+        type: path
+        required: true
+        description:
+          - The path to the Citrix Licensing installer MSI.
+      ctxlic_install_log_file:
+        type: path
+        required: false
+        description:
+          - The path to the log file that will be created during the installation process.
+      ctxlic_install_directory:
+        type: path
+        required: false
+        description:
+          - The directory where the Citrix Licensing server will be installed.
+          - If not defined, the role will use the default installation directory.
+      ctxlic_web_services_for_licensing_port:
+        type: int
+        required: false
+        description:
+          - The port number for the Citrix Licensing web services.
+          - If not defined, the role will use the default port number of 8083.
+      ctxlic_license_server_port:
+        type: int
+        required: false
+        description:
+          - The port number for the Citrix Licensing server.
+          - If not defined, the role will use the default port number of 27000.
+      ctxlic_vendor_daemon_port:
+        type: int
+        required: false
+        description:
+          - The port number for the Citrix Licensing vendor daemon.
+          - If not defined, the role will use the default port number of 7279.
+      ctxlic_ceip_optin:
+        type: str
+        required: false
+        choices:
+          - diagnostic
+          - unidentified
+          - none
+        description:
+          - The Citrix Customer Experience Improvement Program (CEIP) opt-in setting.
+          - If not defined, the role will use the default setting of 'none'.

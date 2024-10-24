@@ -1,9 +1,33 @@
 ---
-- name: Install prerequisites
+- name: Install Chocolatey prerequisite packages
   loop: "{{ _ctxpvs_console_prerequisites }}"
   ansible.builtin.include_tasks: prereq.yml
   loop_control:
     loop_var: _ctxpvs_console_prerequisite
+
+- name: Install Citrix DaaS PowerShell SDK
+  ansible.windows.win_package:
+    path: "{{ _ctxpvs_citrix_daas_powershell_sdk_installer_path }}"
+    arguments: '-quiet'
+    product_id: "{{ _ctxpvs_citrix_daas_powershell_sdk_product_id }}"
+    state: present
+  register: _ctxpvs_daas_powershell_sdk_install_result
+
+- name: Reboot if required
+  when:
+    - _ctxpvs_daas_powershell_sdk_install_result.rc == 3010
+  ansible.windows.win_reboot:
+
+- name: Install Citrix Diagnostic Facility
+  ansible.windows.win_package:
+    path: "{{ _ctxpvs_citrix_diagnostic_facility_installer_path }}"
+    state: present
+  register: _ctxpvs_diagnostic_facility_install_result
+
+- name: Reboot if required
+  when:
+    - _ctxpvs_diagnostic_facility_install_result.rc == 3010
+  ansible.windows.win_reboot:
 
 - name: Install Citrix Provisioning Console
   ansible.windows.win_package:

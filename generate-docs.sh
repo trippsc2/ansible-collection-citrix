@@ -4,6 +4,10 @@ cd ./roles/cqi
 
 aar_doc . markdown
 
+cd ../licensing
+
+aar_doc . markdown
+
 cd ../pvs_console
 
 aar_doc . markdown

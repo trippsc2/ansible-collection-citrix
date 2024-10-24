@@ -1,0 +1,6 @@
+---
+- name: Validate
+  ansible.builtin.import_tasks: validate.yml
+
+- name: Install
+  ansible.builtin.import_tasks: install.yml

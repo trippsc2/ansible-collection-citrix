@@ -1,0 +1,32 @@
+---
+ctxpvs_first_farm_server: false
+
+ctxpvs_database_admin_authentication: ad
+ctxpvs_database_authentication: ad
+
+ctxpvs_database_port: 1433
+ctxpvs_failover_database_port: 1433
+
+ctxpvs_multisubnet_failover: false
+
+ctxpvs_license_server_port: 27000
+
+ctxpvs_use_cloud_licenses: false
+ctxpvs_enable_license_trade_up: true
+
+ctxpvs_use_network_service_account: false
+
+ctxpvs_password_mgmt_interval: 7
+
+ctxpvs_ipc_starting_port: 6890
+ctxpvs_ipc_port_count: 20
+ctxpvs_soap_port: 54321
+
+ctxpvs_verbose_mode: false
+ctxpvs_interrupt_safe_mode: false
+ctxpvs_advanced_memory_support: true
+ctxpvs_network_recovery_method: restore_network_connection
+ctxpvs_network_recovery_timeout_in_seconds: 50
+
+ctxpvs_login_polling_timeout_in_milliseconds: 5000
+ctxpvs_login_general_timeout_in_milliseconds: 30000

@@ -22,8 +22,8 @@ provisioner:
   inventory:
     group_vars:
       subjects:
-        _ctxvda_installer: ./files/VDAServerSetup_2407.exe
-        _ctxcqi_installer: ./files/CitrixCQI.msi
+        _ctxcqi_installer: ../../../../files/cqi/CitrixCQI.msi
+        _ctxvda_installer: ../../../../files/server_vda/VDAServerSetup_2407.exe
         ctxvda_installer_path: C:\Windows\Temp\VDAServerSetup_2407.exe
         ctxvda_controller_list:
           - dc1.test.loc

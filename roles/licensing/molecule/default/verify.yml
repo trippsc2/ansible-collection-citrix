@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts:
+    - subjects
+  gather_facts: false
+  tasks:
+    - name: Check if Citrix Licensing is installed
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+
+          $CtxLicensing = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Licensing*" }))
+
+          $Ansible.Result = $CtxLicensing.Count -gt 0
+      register: _citrix_licensing_installed
+
+    - name: Verify that Citrix Licensing is installed
+      ansible.builtin.assert:
+        that:
+          - _citrix_licensing_installed.result
+        fail_msg: The Citrix Licensing is not installed.
+        success_msg: The Citrix Licensing is installed.

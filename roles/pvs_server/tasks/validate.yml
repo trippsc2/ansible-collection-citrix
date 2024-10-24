@@ -2,20 +2,29 @@
 - name: Gather OS facts
   when:
     - ansible_distribution is not defined or
-      ansible_os_family is not defined
+      ansible_os_family is not defined or
+      ansible_windows_domain_member is not defined
   ansible.builtin.setup:
     gather_subset:
       - '!all'
       - '!min'
       - distribution
-      - os_family
+      - windows_domain
 
 - name: Validate OS
   ansible.builtin.assert:
     that:
       - ansible_os_family == 'Windows'
-    fail_msg: "This role only supports Windows.  {{ ansible_distribution }} is not supported."
+      - ('Windows Server' in ansible_distribution)
+    fail_msg: "This role only supports Windows Server.  {{ ansible_distribution }} is not supported."
     success_msg: "This role supports {{ ansible_distribution }}."
+
+- name: Validate domain membership
+  ansible.builtin.assert:
+    that:
+      - ansible_windows_domain_member
+    fail_msg: This role requires the server to be a member of a domain.
+    success_msg: This server is a member of a domain.
 
 - name: Get installer info
   ansible.windows.win_stat:
@@ -40,6 +49,7 @@
   ansible.builtin.set_fact:
     _ctxpvs_server_prerequisites: "{{ _ctxpvs_server_prerequisites_by_checksum[_ctxpvs_server_installer_info.stat.checksum] }}"
     _ctxpvs_server_product_id: "{{ _ctxpvs_server_product_id_by_checksum[_ctxpvs_server_installer_info.stat.checksum] }}"
+    _ctxpvs_citrix_infra_monitor_needed: "{{ _ctxpvs_citrix_infra_monitor_needed_by_checksum[_ctxpvs_server_installer_info.stat.checksum] }}"
 
 - name: Check if any version of Citrix Provisioning Server is installed
   ansible.windows.win_powershell:
@@ -79,3 +89,242 @@
       - ctxpvs_pxe_service_type is defined
     fail_msg: "The PXE service type must be defined when the IP service type is not 'citrix_bootp'."
     success_msg: The PXE service type is defined.
+
+- name: Validate database admin authentication variables
+  when:
+    - ctxpvs_database_admin_authentication == 'sql'
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_database_admin_username is defined
+      - ctxpvs_database_admin_password is defined
+    fail_msg: The database admin username and password must be defined when using SQL authentication.
+    success_msg: The database admin username and password are defined.
+
+- name: Validate database authentication variables
+  when:
+    - ctxpvs_database_authentication == 'sql'
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_database_admin_username is defined
+      - ctxpvs_database_admin_password is defined
+    fail_msg: The database admin username and password must be defined when using SQL authentication.
+    success_msg: The database admin username and password are defined.
+
+- name: Validate database server is valid FQDN
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_database_server is community.general.fqdn_valid
+    fail_msg: The database server must be a valid FQDN.
+    success_msg: The database server is a valid FQDN.
+
+- name: Validate database port is a valid port
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_database_port | int > 0
+      - ctxpvs_database_port | int < 65536
+    fail_msg: The database port must be a valid port.
+    success_msg: The database port is a valid port.
+
+- name: Validate failover database is a valid FQDN
+  when:
+    - ctxpvs_failover_database_server is defined
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_failover_database_server is community.general.fqdn_valid
+    fail_msg: The failover database server must be a valid FQDN.
+    success_msg: The failover database server is a valid FQDN.
+
+- name: Validate failover database port is a valid port
+  when:
+    - ctxpvs_failover_database_server is defined
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_failover_database_port | int > 0
+      - ctxpvs_failover_database_port | int < 65536
+    fail_msg: The failover database port must be a valid port.
+    success_msg: The failover database port is a valid port.
+
+- name: Validate collection name is defined
+  when:
+    - ctxpvs_first_farm_server or
+      ctxpvs_first_site_server
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_collection_name is defined
+    fail_msg: The collection name must be defined when creating a new farm or site.
+    success_msg: The collection name is defined.
+
+- name: Validate default store path is defined
+  when:
+    - ctxpvs_first_farm_server or
+      ctxpvs_first_store_server
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_default_store_path is defined
+    fail_msg: The default store path must be defined when creating a new farm or store.
+    success_msg: The default store path is defined.
+
+- name: Validate AD group is defined
+  when:
+    - ctxpvs_first_farm_server
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_ad_admin_group is defined
+    fail_msg: The AD group must be defined when creating a new farm.
+    success_msg: The AD group is defined.
+
+- name: Validate license server is a valid FQDN
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_license_server is community.general.fqdn_valid
+    fail_msg: The license server must be a valid FQDN.
+    success_msg: The license server is a valid FQDN.
+
+- name: Validate license server port is a valid port
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_license_server_port | int > 0
+      - ctxpvs_license_server_port | int < 65536
+    fail_msg: The license server port must be a valid port.
+    success_msg: The license server port is a valid port.
+
+- name: Validate service account is defined
+  when:
+    - not ctxpvs_use_network_service_account
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_service_username is defined
+      - ctxpvs_service_password is defined
+    fail_msg: The service account username and password must be defined when not using the network service account.
+    success_msg: The service account username and password are defined.
+
+- name: Validate password management interval is between 1 and 30 days.
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_password_mgmt_interval | int > 0
+      - ctxpvs_password_mgmt_interval | int < 31
+    fail_msg: The password management interval must be between 1 and 30 days.
+    success_msg: The password management interval is valid.
+
+- name: Validate stream adapter IP addresses is not an empty list
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_stream_adapter_ip_addresses | length > 0
+    fail_msg: The stream adapter list must not be empty.
+    success_msg: The stream adapter list is not empty.
+
+- name: Validate stream adapter IP addresses are valid IPv4 addresses
+  loop: "{{ ctxpvs_stream_adapter_ip_addresses }}"
+  ansible.builtin.assert:
+    that:
+      - item is ansible.utils.ipv4_address
+    fail_msg: The stream adapter IP address '{{ item }}' is not a valid IPv4 address.
+    success_msg: The stream adapter IP address '{{ item }}' is a valid IPv4 address.
+
+- name: Validate management IP address is a valid IPv4 address
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_mgmt_ip_address is ansible.utils.ipv4_address
+    fail_msg: The management IP address '{{ ctxpvs_mgmt_ip_address }}' is not a valid IPv4 address.
+    success_msg: The management IP address '{{ ctxpvs_mgmt_ip_address }}' is a valid IPv4 address.
+
+- name: Validate IPC starting port is a valid port
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_ipc_starting_port | int > 0
+      - ctxpvs_ipc_starting_port | int < 65536
+    fail_msg: The IPC starting port must be a valid port.
+    success_msg: The IPC starting port is a valid port.
+
+- name: Validate IPC port count is greater than 0
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_ipc_port_count | int > 0
+    fail_msg: The IPC port count must be greater than 0.
+    success_msg: The IPC port count is valid.
+
+- name: Validate SOAP port is a valid port
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_soap_port | int > 0
+      - ctxpvs_soap_port | int < 65536
+    fail_msg: The SOAP port must be a valid port.
+    success_msg: The SOAP port is a valid port.
+
+- name: Validate stream servers list is not empty
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_stream_servers | length > 0
+    fail_msg: The stream servers list must not be empty.
+    success_msg: The stream servers list is not empty.
+
+- name: Validate stream servers are valid IP addresses
+  loop: "{{ ctxpvs_stream_servers }}"
+  ansible.builtin.assert:
+    that:
+      - item.ip_address is ansible.utils.ipv4_address
+    fail_msg: The stream server IP address '{{ item.ip_address }}' is not a valid IPv4 address.
+    success_msg: The stream server IP address '{{ item.ip_address }}' is a valid IPv4 address.
+
+- name: Validate stream servers have a valid subnet mask
+  loop: "{{ ctxpvs_stream_servers }}"
+  when:
+    - item.subnet_mask is defined
+  ansible.builtin.assert:
+    that:
+      - item.subnet_mask is ansible.utils.ipv4_netmask
+    fail_msg: The stream server subnet mask '{{ item.subnet_mask }}' is not a valid IPv4 subnet mask.
+    success_msg: The stream server subnet mask '{{ item.subnet_mask }}' is a valid IPv4 subnet mask.
+
+- name: Validate stream servers have a valid gateway
+  loop: "{{ ctxpvs_stream_servers }}"
+  when:
+    - item.gateway is defined
+  ansible.builtin.assert:
+    that:
+      - item.gateway is ansible.utils.ipv4_address
+    fail_msg: The stream server gateway '{{ item.gateway }}' is not a valid IPv4 address.
+    success_msg: The stream server gateway '{{ item.gateway }}' is a valid IPv4 address.
+
+- name: Validate stream servers have a valid port
+  loop: "{{ ctxpvs_stream_servers }}"
+  when:
+    - item.port is defined
+  ansible.builtin.assert:
+    that:
+      - item.port | int > 0
+      - item.port | int < 65536
+    fail_msg: The stream server port must be a valid port.
+    success_msg: The stream server port is a valid port.
+
+- name: Validate network recovery timeout is greater than 0
+  when:
+    - ctxpvs_network_recovery_method == 'reboot_to_hard_drive'
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_network_recovery_timeout_in_seconds | int > 0
+    fail_msg: The network recovery timeout must be greater than 0.
+    success_msg: The network recovery timeout is valid.
+
+- name: Validate login polling timeout is greater than 0
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_login_polling_timeout_in_milliseconds | int > 0
+    fail_msg: The login polling timeout must be greater than 0.
+    success_msg: The login polling timeout is valid.
+
+- name: Validate login general timeout is greater than 0
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_login_general_timeout_in_milliseconds | int > 0
+    fail_msg: The login general timeout must be greater than 0.
+    success_msg: The login general timeout is valid.
+
+- name: Validate CIS password is defined
+  when:
+    - ctxpvs_cis_username is defined
+  ansible.builtin.assert:
+    that:
+      - ctxpvs_cis_password is defined
+    fail_msg: The CIS password must be defined when a CIS username is defined.
+    success_msg: The CIS password is defined.

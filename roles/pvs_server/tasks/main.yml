@@ -6,4 +6,7 @@
   ansible.builtin.import_tasks: install.yml
 
 - name: Configure
-  ansible.builtin.import_tasks: configure.yml
+  when:
+    - not _ctxpvs_server_is_configured or
+      _ctxpvs_server_install_result is changed
+  ansible.builtin.include_tasks: configure.yml

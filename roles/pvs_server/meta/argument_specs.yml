@@ -44,3 +44,372 @@ argument_specs:
           - If the role performs a fresh install, this will indicate to the configuration wizard whether this server is creating a new farm.
           - If the role performs an upgrade, the older farm configuration will be preserved.
           - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_first_site_server:
+        type: bool
+        required: false
+        default: false
+        description:
+          - If the role performs a fresh install, this will indicate to the configuration wizard whether this server is creating a new site.
+          - If the role performs an upgrade, the older site configuration will be preserved.
+          - If *ctxpvs_first_farm_server* is set to `true`, this is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_first_store_server:
+        type: bool
+        required: false
+        default: false
+        description:
+          - If the role performs a fresh install, this will indicate to the configuration wizard whether this server is creating a new store.
+          - If the role performs an upgrade, the older store configuration will be preserved.
+          - If *ctxpvs_first_farm_server* is set to `true`, this is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_admin_authentication:
+        type: str
+        required: false
+        default: ad
+        choices:
+          - ad
+          - sql
+        description:
+          - The type of authentication to use when creating and configuring the database.
+          - If set to `ad`, the role will use the Active Directory account that is running the Citrix PVS Configuration Wizard.
+          - If set to `sql`, the *ctxpvs_database_admin_username* and *ctxpvs_database_admin_password* options are required.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_admin_username:
+        type: str
+        required: false
+        description:
+          - The SQL Server username to use when creating and configuring the database.
+          - If *ctxpvs_database_admin_authentication* is set to `sql`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_admin_password:
+        type: str
+        required: false
+        description:
+          - The password for the SQL Server username to use when creating and configuring the database.
+          - If *ctxpvs_database_admin_authentication* is set to `sql`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_authentication:
+        type: str
+        required: false
+        default: ad
+        choices:
+          - ad
+          - sql
+        description:
+          - The type of authentication to use when connecting to the database.
+          - If set to `ad`, the user running the Provisioning service will connect to the database.
+          - If set to `sql`, the *ctxpvs_database_username* and *ctxpvs_database_password* options are required.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_username:
+        type: str
+        required: false
+        description:
+          - The SQL Server username to use when connecting to the database.
+          - If *ctxpvs_database_authentication* is set to `sql`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_password:
+        type: str
+        required: false
+        description:
+          - The password for the SQL Server username to use when connecting to the database.
+          - If *ctxpvs_database_authentication* is set to `sql`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_server:
+        type: str
+        required: true
+        description:
+          - The name of the SQL Server to configure for the Citrix Provisioning server.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_port:
+        type: int
+        required: false
+        default: 1433
+        description:
+          - The port number to use when connecting to the SQL Server.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_multisubnet_failover:
+        type: bool
+        required: false
+        default: false
+        description:
+          - If the SQL Server is configured for multisubnet failover, set this to `true`.
+          - This is used for SQL Server Always On Availability Groups that span multiple subnets.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_failover_database_server:
+        type: str
+        required: false
+        description:
+          - The name of the SQL Server to use when the primary SQL Server is unavailable.
+          - This is used when SQL Server Mirroring is used.
+          - If not defined, this will not be configured.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_failover_database_port:
+        type: int
+        required: false
+        default: 1433
+        description:
+          - The port number to use when connecting to the failover SQL Server.
+          - If *ctxpvs_failover_database_server* is not defined, this will not be configured.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_database_name:
+        type: str
+        required: true
+        description:
+          - The name of the database to configure for the Citrix Provisioning server.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_farm_name:
+        type: str
+        required: true
+        description:
+          - The name of the farm to create or join.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_site_name:
+        type: str
+        required: true
+        description:
+          - The name of the site to create or join.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_collection_name:
+        type: str
+        required: false
+        description:
+          - The name of the collection to create or join.
+          - If *ctxpvs_first_site_server* or *ctxpvs_first_farm_server* is set to `true`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_store_name:
+        type: str
+        required: true
+        description:
+          - The name of the store to create or join.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_default_store_path:
+        type: path
+        required: false
+        description:
+          - The default path to configure on the store.
+          - If *ctxpvs_first_store_server* or *ctxpvs_first_farm_server* is set to `true`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_ad_admin_group:
+        type: str
+        required: false
+        description:
+          - The Active Directory group to use when creating a new farm.
+          - If *ctxpvs_first_farm_server* is set to `true`, this is required. Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_license_server:
+        type: str
+        required: true
+        description:
+          - The name of the Citrix License Server to use.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_license_server_port:
+        type: int
+        required: false
+        default: 27000
+        description:
+          - The port number to use when connecting to the Citrix License Server.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_use_cloud_licenses:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to use Citrix Cloud licenses.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_enable_license_trade_up:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to enable license trade-up.
+          - This allows licenses of greater functionality to be used in place of lesser licenses.
+          - If *ctxpvs_use_cloud_licenses* is set to `true`, this is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_use_network_service_account:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to use the Network Service account for the Citrix Provisioning Server service.
+          - If set to `false`, the *ctxpvs_service_username* and *ctxpvs_service_password* options are required.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_service_username:
+        type: str
+        required: false
+        description:
+          - The username to use for the Citrix Provisioning Server service.
+          - If *ctxpvs_use_network_service_account* is set to `false`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_service_password:
+        type: str
+        required: false
+        description:
+          - The password for the username to use for the Citrix Provisioning Server service.
+          - If *ctxpvs_use_network_service_account* is set to `false`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_password_mgmt_interval:
+        type: int
+        required: false
+        default: 7
+        description:
+          - The number of days between password changes for the Citrix Provisioning created machine accounts.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_stream_adapter_ip_addresses:
+        type: list
+        required: true
+        elements: str
+        description:
+          - A list of IP addresses to use for the Citrix Provisioning Server stream adapters.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_mgmt_ip_address:
+        type: str
+        required: true
+        description:
+          - The IP address to use for the Citrix Provisioning Server management interface.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_ipc_starting_port:
+        type: int
+        required: false
+        default: 6890
+        description:
+          - The starting port number to use for the Citrix Provisioning Server inter-process communication.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_ipc_port_count:
+        type: int
+        required: false
+        default: 20
+        description:
+          - The number of ports to use for the Citrix Provisioning Server inter-process communication.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_soap_port:
+        type: int
+        required: false
+        default: 54321
+        description:
+          - The port number to use for the Citrix Provisioning Server SOAP service.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_stream_servers:
+        type: list
+        required: true
+        elements: dict
+        description:
+          - A list of stream servers to configure.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+        options:
+          ip_address:
+            type: str
+            required: true
+            description:
+              - The IP address of the stream server.
+              - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+          subnet_mask:
+            type: str
+            required: false
+            default: '0.0.0.0'
+            description:
+              - The subnet mask of the stream server.
+              - If the server receives a DHCP address, this should not be set or should be set to `0.0.0.0`.
+              - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+          gateway_ip:
+            type: str
+            required: false
+            default: '0.0.0.0'
+            description:
+              - The gateway IP address of the stream server.
+              - If the server receives a DHCP address, this should not be set or should be set to `0.0.0.0`.
+              - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+          port:
+            type: int
+            required: false
+            default: 6910
+            description:
+              - The port number to use for the stream server.
+              - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_verbose_mode:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to configure the stream service to run in Verbose mode.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_interrupt_safe_mode:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to configure the stream service to interrupt safe mode.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_advanced_memory_support:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to configure the stream service to use advanced memory support.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_network_recovery_method:
+        type: str
+        required: false
+        default: restore_network_connection
+        choices:
+          - restore_network_connection
+          - reboot_to_hard_drive
+        description:
+          - The recovery method to use when the network connection is lost.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_network_recovery_timeout_in_seconds:
+        type: int
+        required: false
+        default: 50
+        description:
+          - The number of seconds to wait before attempting to recover the network connection.
+          - If *ctxpvs_network_recovery_method* is set to `restore_network_connection`, this is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_login_polling_timeout_in_milliseconds:
+        type: int
+        required: false
+        default: 5000
+        description:
+          - The number of milliseconds to wait between polling the machines for logged-in users.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_login_general_timeout_in_milliseconds:
+        type: int
+        required: false
+        default: 30000
+        description:
+          - The number of milliseconds to wait for a machine login.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_configure_soap_ssl:
+        type: bool
+        required: false
+        default: false
+        description:
+          - Whether to configure the SOAP service to use SSL.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_soap_ssl_port:
+        type: int
+        required: false
+        default: 54323
+        description:
+          - The port number to use for the SOAP service when SSL is enabled.
+          - If *ctxpvs_configure_soap_ssl* is set to `false`, this is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_soap_ssl_certificate:
+        type: str
+        required: false
+        description:
+          - The serial number or thumbprint of the certificate to use for the SOAP service when SSL is enabled.
+          - If *ctxpvs_configure_soap_ssl* is set to `true`, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_cis_username:
+        type: str
+        required: false
+        description:
+          - The username to use for the Citrix Insight Services.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'
+      ctxpvs_cis_password:
+        type: str
+        required: false
+        description:
+          - The password for the username to use for the Citrix Insight Services.
+          - If *ctxpvs_cis_username* is defined, this is required.  Otherwise, it is ignored.
+          - 'Reference: https://docs.citrix.com/en-us/provisioning/current-release/install/install-wizard-silent'

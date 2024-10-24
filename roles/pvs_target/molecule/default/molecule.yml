@@ -23,7 +23,7 @@ provisioner:
     group_vars:
       subjects:
         _ctxpvs_version: ${MOLECULE_CITRIX_PVS_VERSION:-2407}
-        _ctxpvs_target_installer_source: "./files/{{ _ctxpvs_version }}/PVS_Device_x64.exe"
+        _ctxpvs_target_installer_source: "../../../../files/pvs_target/{{ _ctxpvs_version }}/PVS_Device_x64.exe"
         ctxpvs_target_installer_path: C:\Windows\Temp\PVS_Device_x64.exe
       windows:
         ansible_shell_type: powershell

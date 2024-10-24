@@ -5,6 +5,30 @@
   loop_control:
     loop_var: _ctxpvs_server_prerequisite
 
+- name: Install Citrix Infra Monitor
+  when:
+    - _ctxpvs_citrix_infra_monitor_needed
+  ansible.windows.win_package:
+    path: "{{ _ctxpvs_citrix_infra_monitor_installer_path }}"
+    state: present
+  register: _ctxpvs_citrix_infra_monitor_install_result
+
+- name: Reboot if required
+  when:
+    - _ctxpvs_citrix_infra_monitor_install_result.rc == 3010
+  ansible.windows.win_reboot:
+
+- name: Install Citrix Telemetry Service
+  ansible.windows.win_package:
+    path: "{{ _ctxpvs_citrix_telemetry_service_installer_path }}"
+    state: present
+  register: _ctxpvs_telemetry_service_install_result
+
+- name: Reboot if required
+  when:
+    - _ctxpvs_telemetry_service_install_result.rc == 3010
+  ansible.windows.win_reboot:
+
 - name: Stop Citrix Provisioning Stream Service
   when:
     - _ctxpvs_server_needs_upgrade

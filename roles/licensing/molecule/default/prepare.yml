@@ -1,0 +1,9 @@
+---
+- name: Prepare
+  hosts:
+    - subjects
+  tasks:
+    - name: Copy Citrix Licensing installer
+      ansible.windows.win_copy:
+        src: ../../../../files/licensing
+        dest: C:\Windows\Temp\

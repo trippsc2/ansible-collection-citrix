@@ -1,7 +1,7 @@
 {% if ctxpvs_ip_service_type is defined %}
 IPServiceType={{ _ctxpvs_ip_service_type }}
 {% endif %}
-{% if ctxpvs_ip_service_type is defined and ctxpvs_ip_service_type == 'citrix_bootp' %}
+{% if ctxpvs_ip_service_type | default('') == 'citrix_bootp' %}
 PXEServiceType=1
 {% else %}
 PXEServiceType={{ _ctxpvs_pxe_service_type }}
@@ -12,54 +12,60 @@ FarmConfiguration=0
 FarmConfiguration={{ ctxpvs_first_farm_server | ternary('1', '2') }}
 {% endif %}
 DatabaseServer={{ ctxpvs_database_server -}}
-               {{- ',' + ctxpvs_database_port | string if ctxpvs_database_port | default(1433) | int != 1433 }}
+               {{- ',' + ctxpvs_database_port | string if ctxpvs_database_port | int != 1433 }}
 DatabaseInstance={{ ctxpvs_database_instance | default('') }}
 MultiSubnetFailover={{ ctxpvs_multisubnet_failover | ternary('1', '0') }}
+DatabaseAuthenticationMode={{ _ctxpvs_database_authentication }}
 {% if ctxpvs_failover_database_server is defined %}
 FailoverDatabaseServer={{ ctxpvs_failover_database_server -}}
-                       {{- ',' + ctxpvs_failover_database_port | string if ctxpvs_failover_database_port | default(1433) | int != 1433 }}
+                       {{- ',' + ctxpvs_failover_database_port | string if ctxpvs_failover_database_port | int != 1433 }}
 {% endif %}
-{% if ctxpvs_database_admin_username is defined %}
-DatabaseAdminAuthenticationMode=SqlPassword
-DatabaseAdminUsername={{ ctxpvs_database_admin_username }}
-DatabaseAdminPassword={{ ctxpvs_database_admin_password }}
-{% endif %}
-{% if ctxpvs_database_username is defined %}
-DatabaseAuthenticationMode=SqlPassword
+{% if ctxpvs_database_authentication == 'sql' %}
 DatabaseUsername={{ ctxpvs_database_username }}
 DatabasePassword={{ ctxpvs_database_password }}
+{% else %}
+DatabaseUsername=
+DatabasePassword=
+{% endif %}
+{% if not _ctxpvs_server_needs_upgrade or not _ctxpvs_server_is_configured %}
+DatabaseAdminAuthenticationMode={{ _ctxpvs_database_admin_authentication }}
+{% if ctxpvs_database_admin_authentication == 'sql' %}
+DatabaseAdminUsername={{ ctxpvs_database_admin_username }}
+DatabaseAdminPassword={{ ctxpvs_database_admin_password }}
+{% else %}
+DatabaseAdminUsername=
+DatabaseAdminPassword=
+{% endif %}
 {% endif %}
 {% if ctxpvs_first_farm_server %}
 DatabaseNew={{ ctxpvs_database_name }}
 FarmNew={{ ctxpvs_farm_name }}
+SiteNew={{ ctxpvs_site_name }}
+CollectionNew={{ ctxpvs_collection_name }}
+Store={{ ctxpvs_store_name }}
+DefaultPath={{ ctxpvs_default_store_path }}
 ADGroup={{ ctxpvs_ad_admin_group }}
 {% else %}
 DatabaseExisting={{ ctxpvs_database_name }}
 FarmExisting={{ ctxpvs_farm_name }}
-{% endif %}
-{% if ctxpvs_first_farm_server %}
-SiteNew={{ ctxpvs_site_name }}
-{% elif ctxpvs_first_site_server %}
+{% if ctxpvs_first_site_server %}
 Site={{ ctxpvs_site_name }}
+Collection={{ ctxpvs_collection_name }}
 {% else %}
 ExistingSite={{ ctxpvs_site_name }}
 {% endif %}
-{% if ctxpvs_first_farm_server %}
-CollectionNew={{ ctxpvs_collection_name }}
-{% else %}
-Collection={{ ctxpvs_collection_name }}
-{% endif %}
-{% if _ctxpvs_first_store_server %}
+{% if ctxpvs_first_store_server %}
 Store={{ ctxpvs_store_name }}
 DefaultPath={{ ctxpvs_default_store_path }}
 {% else %}
 ExistingStore={{ ctxpvs_store_name }}
 {% endif %}
+{% endif %}
 LicenseServer={{ ctxpvs_license_server }}
 LicenseServerPort={{ ctxpvs_license_server_port }}
-LicenseSKU={{ ctxpvs_cloud_licenses | ternary('1', '0') }}
-{% if not ctxpvs_cloud_licenses %}
-LicenseTradeup={{ ctxpvs_license_trade_up | ternary('1', '0') }}
+LicenseSKU={{ ctxpvs_use_cloud_licenses | ternary('1', '0') }}
+{% if not ctxpvs_use_cloud_licenses %}
+LicenseTradeup={{ ctxpvs_enable_license_trade_up | ternary('1', '0') }}
 {% endif %}
 {% if ctxpvs_use_network_service_account %}
 Network=1
@@ -70,22 +76,23 @@ UserName={{ ctxpvs_service_username }}
 UserPass={{ ctxpvs_service_password }}
 {% endif %}
 PasswordManagementInterval={{ ctxpvs_password_mgmt_interval }}
-StreamNetworkAdapterIP={{ ctxpvs_stream_adapter_ips | join(',') }}
+StreamNetworkAdapterIP={{ ctxpvs_stream_adapter_ip_addresses | join(',') }}
 ManagementNetworkAdapterIP={{ ctxpvs_mgmt_ip_address }}
 IpcPortBase={{ ctxpvs_ipc_starting_port }}
 IpcPortCount={{ ctxpvs_ipc_port_count }}
 SoapPort={{ ctxpvs_soap_port }}
-BootstrapFile={{ _ctxpvs_bootstrap_file }}
 {% for server in ctxpvs_stream_servers %}
 LS{{ loop.index }}={{ server.ip_address }},{{ server.subnet_mask | default('0.0.0.0') }},{{ server.gateway_ip | default('0.0.0.0') }},{{ server.port | default('6910') }}
 {% endfor %}
 AdvancedVerbose={{ ctxpvs_verbose_mode | ternary('1', '0') }}
 AdvancedInterruptSafeMode={{ ctxpvs_interrupt_safe_mode | ternary('1', '0') }}
 AdvancedMemorySupport={{ ctxpvs_advanced_memory_support | ternary('1', '0') }}
-AdvancedRebootFromHD={{ ctxpvs_reboot_from_hard_drive | ternary('1', '0') }}
-AdvancedRecoverSeconds={{ ctxpvs_recovery_time }}
-AdvancedLoginPolling={{ ctxpvs_login_polling_timeout }}
-AdvancedLoginGeneral={{ ctxpvs_login_general_timeout }}
+AdvancedRebootFromHD={{ _ctxpvs_network_recovery_method }}
+{% if ctxpvs_network_recovery_method == 'reboot_to_hard_drive' %}
+AdvancedRecoverSeconds={{ ctxpvs_network_recovery_timeout_in_seconds }}
+{% endif %}
+AdvancedLoginPolling={{ ctxpvs_login_polling_timeout_in_milliseconds }}
+AdvancedLoginGeneral={{ ctxpvs_login_general_timeout_in_milliseconds }}
 {% if ctxpvs_cis_username is defined %}
 CisUserName={{ ctxpvs_cis_username }}
 CisPassword={{ ctxpvs_cis_password }}

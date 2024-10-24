@@ -9,9 +9,9 @@
         script: |
           $Ansible.Changed = $false
 
-          $PVSConsole = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Provisioning Console*" }))
+          $PVSServer = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Provisioning Console*" }))
 
-          $Ansible.Result = $PVSConsole.Count -gt 0
+          $Ansible.Result = $PVSServer.Count -gt 0
       register: _pvs_console_installed
 
     - name: Verify that the PVS Console is installed

@@ -26,12 +26,15 @@ _ctxpvs_console_prerequisites_by_checksum:
   e140ffd17e1224d708ba0419c69810f6beaa31a6:
     - azurepowershell
     - dotnetfx
+    - vcredist140
   09caefa858f283b53f4afdedfb37016da74480b5:
     - azurepowershell
     - dotnetfx
+    - vcredist140
   a3be0c39cf546442c5fd2d4d449597e4965f5dc8:
     - azurepowershell
     - dotnetfx
+    - vcredist140
 
 _ctxpvs_console_product_id_by_checksum:
   2f89bcb3075f0cecd9fdf680c527186d28a911d1: '{4D794CB5-1A20-4ACA-9502-CA57682F4519}'
@@ -40,3 +43,12 @@ _ctxpvs_console_product_id_by_checksum:
   e140ffd17e1224d708ba0419c69810f6beaa31a6: '{C4626305-8945-4ADC-80A2-6D54188C59E4}'
   09caefa858f283b53f4afdedfb37016da74480b5: '{C3365B5E-5878-43D0-A0F9-54C7820D115D}'
   a3be0c39cf546442c5fd2d4d449597e4965f5dc8: '{CE022533-E311-4D42-B675-285920C32273}'
+
+_ctxpvs_citrix_daas_powershell_sdk_installer_path: >-
+  {{ ctxpvs_console_installer_path | win_dirname }}\ISSetupPrerequisites\{1F8AAA3D-DC21-4A1E-1234-6C24843A68E3}\CitrixPoshSdk.exe
+_ctxpvs_citrix_provisioning_gcp_installer_path: >-
+  {{ ctxpvs_console_installer_path | win_dirname }}\ISSetupPrerequisites\{DC92F9AB-FF9F-41A8-AB82-3D06329BA354}\Citrix.Provisioning.Gcp.Installer.msi
+_ctxpvs_citrix_diagnostic_facility_installer_path: >-
+  {{ ctxpvs_console_installer_path | win_dirname }}\ISSetupPrerequisites\{60F3781B-8B00-4002-8E57-3121324DEC7B}\cdf_x64.msi
+
+_ctxpvs_citrix_daas_powershell_sdk_product_id: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'

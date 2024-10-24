@@ -1,0 +1,12 @@
+---
+- name: Install Citrix Licensing
+  ansible.windows.win_package:
+    path: "{{ ctxlic_installer_path }}"
+    arguments: "{{ _ctxlic_install_arguments }}"
+    state: present
+  register: _ctxlic_install_result
+
+- name: Reboot if required
+  when:
+    - _ctxlic_install_result.rc == 3010
+  ansible.windows.win_reboot:

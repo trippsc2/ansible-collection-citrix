@@ -9,32 +9,14 @@ _ctxpvs_server_version_by_checksum:
 
 _ctxpvs_server_prerequisites_by_checksum:
   ca539cddd3fb6db8b14f359d9ee414be864d21fe:
-    - azurepowershell
-    - dotnetfx
-    - vcredist140
-    - webview2-runtime
     - msoledbsql
   d781459a7f371a5d1e363a9b9da874e83d8690be:
-    - azurepowershell
-    - dotnetfx
-    - vcredist140
-    - webview2-runtime
     - msoledbsql
   c935189756e77dfbd87f8a2d0a2258beeec18f9c:
-    - azurepowershell
-    - dotnetfx
-    - vcredist140
-    - webview2-runtime
     - msoledbsql
-  48284aec164076afcdf13ba3faaaa8c5ed05b35a:
-    - azurepowershell
-    - dotnetfx
-  9b34e5e9531a6dc35df6711e9aa05bdb0edd4c53:
-    - azurepowershell
-    - dotnetfx
-  070acd01034f4b80a94a5bc83da7ae72092d42e7:
-    - azurepowershell
-    - dotnetfx
+  48284aec164076afcdf13ba3faaaa8c5ed05b35a: []
+  9b34e5e9531a6dc35df6711e9aa05bdb0edd4c53: []
+  070acd01034f4b80a94a5bc83da7ae72092d42e7: []
 
 _ctxpvs_server_product_id_by_checksum:
   ca539cddd3fb6db8b14f359d9ee414be864d21fe: '{FEB29051-3956-408F-B0E9-FC11AA879B33}'
@@ -43,6 +25,20 @@ _ctxpvs_server_product_id_by_checksum:
   48284aec164076afcdf13ba3faaaa8c5ed05b35a: '{2D7E64CB-9536-47BA-B331-F5DD736882D3}'
   9b34e5e9531a6dc35df6711e9aa05bdb0edd4c53: '{7EB67212-B1E5-4A89-A763-0AB105E2D979}'
   070acd01034f4b80a94a5bc83da7ae72092d42e7: '{AF33090A-06CF-413F-8D6B-8D4AC1178405}'
+
+_ctxpvs_citrix_infra_monitor_needed_by_checksum:
+  ca539cddd3fb6db8b14f359d9ee414be864d21fe: true
+  d781459a7f371a5d1e363a9b9da874e83d8690be: false
+  c935189756e77dfbd87f8a2d0a2258beeec18f9c: false
+  48284aec164076afcdf13ba3faaaa8c5ed05b35a: false
+  9b34e5e9531a6dc35df6711e9aa05bdb0edd4c53: false
+  070acd01034f4b80a94a5bc83da7ae72092d42e7: false
+
+_ctxpvs_citrix_infra_monitor_installer_path: >-
+  {{ ctxpvs_server_installer_path | win_dirname }}\ISSetupPrerequisites\{2A95F944-A630-41A9-BEAD-F1869F3087E9}\CitrixInfraMonitor.msi
+
+_ctxpvs_citrix_telemetry_service_installer_path: >-
+  {{ ctxpvs_server_installer_path | win_dirname }}\ISSetupPrerequisites\{60F3781B-8B00-4002-8E57-3121324DE1FA}\TelemetryServiceInstaller_x64.msi
 
 _ctxpvs_ip_service_type_values:
   microsoft_dhcp: 0
@@ -53,8 +49,25 @@ _ctxpvs_pxe_service_type_values:
   citrix_pxe: 1
   other: 0
 
+_ctxpvs_database_authentication_values:
+  ad: ActiveDirectoryIntegrated
+  sql: SqlPassword
+
+_ctxpvs_network_recovery_method_values:
+  restore_network_connection: 0
+  reboot_to_hard_drive: 1
+
 _ctxpvs_ip_service_type: >-
   {{ _ctxpvs_ip_service_type_values[ctxpvs_ip_service_type] }}
 
 _ctxpvs_pxe_service_type: >-
   {{ _ctxpvs_pxe_service_type_values[ctxpvs_pxe_service_type] }}
+
+_ctxpvs_database_admin_authentication: >-
+  {{ _ctxpvs_database_authentication_values[ctxpvs_database_admin_authentication] }}
+
+_ctxpvs_database_authentication: >-
+  {{ _ctxpvs_database_authentication_values[ctxpvs_database_authentication] }}
+
+_ctxpvs_network_recovery_method: >-
+  {{ _ctxpvs_network_recovery_method_values[ctxpvs_network_recovery_method] }}

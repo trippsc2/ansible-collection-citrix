@@ -1,0 +1,76 @@
+---
+- name: Gather OS facts
+  when:
+    - ansible_distribution is not defined or
+      ansible_os_family is not defined
+  ansible.builtin.setup:
+    gather_subset:
+      - '!all'
+      - '!min'
+      - distribution
+
+- name: Validate OS
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family == 'Windows'
+      - ('Windows Server' in ansible_distribution)
+    fail_msg: "This role only supports Windows Server.  {{ ansible_distribution }} is not supported."
+    success_msg: "This role supports {{ ansible_distribution }}."
+
+- name: Get installer info
+  ansible.windows.win_stat:
+    path: "{{ ctxlic_installer_path }}"
+  register: _ctxlic_installer_path_info
+
+- name: Validate installer exists
+  ansible.builtin.assert:
+    that:
+      - _ctxlic_installer_path_info.stat.exists
+    fail_msg: "The installer file '{{ ctxlic_installer_path }}' does not exist."
+    success_msg: "The installer file '{{ ctxlic_installer_path }}' exists."
+
+- name: Validate install log file folder
+  when:
+    - ctxlic_install_log_file is defined
+  block:
+    - name: Check that install log file folder exists
+      ansible.windows.win_stat:
+        path: "{{ ctxlic_install_log_file | win_dirname }}"
+      register: _ctxlic_install_log_file_folder_info
+
+    - name: Validate install log file folder exists
+      ansible.builtin.assert:
+        that:
+          - _ctxlic_install_log_file_folder_info.stat.exists
+        fail_msg: "The folder '{{ ctxlic_install_log_file | win_dirname }}' does not exist."
+        success_msg: "The folder '{{ ctxlic_install_log_file | win_dirname }}' exists."
+
+- name: Validate Web Services for Licensing port is valid
+  when:
+    - ctxlic_web_services_for_licensing_port is defined
+  ansible.builtin.assert:
+    that:
+      - ctxlic_web_services_for_licensing_port >= 1
+      - ctxlic_web_services_for_licensing_port <= 65535
+    fail_msg: The port number for the Citrix Licensing web services must be between 1 and 65535.
+    success_msg: The port number for the Citrix Licensing web services is valid.
+
+- name: Validate License Server port is valid
+  when:
+    - ctxlic_license_server_port is defined
+  ansible.builtin.assert:
+    that:
+      - ctxlic_license_server_port >= 1
+      - ctxlic_license_server_port <= 65535
+    fail_msg: The port number for the Citrix Licensing server must be between 1 and 65535.
+    success_msg: The port number for the Citrix Licensing server is valid.
+
+- name: Validate Vendor Daemon port is valid
+  when:
+    - ctxlic_vendor_daemon_port is defined
+  ansible.builtin.assert:
+    that:
+      - ctxlic_vendor_daemon_port >= 1
+      - ctxlic_vendor_daemon_port <= 65535
+    fail_msg: The port number for the Citrix Licensing vendor daemon must be between 1 and 65535.
+    success_msg: The port number for the Citrix Licensing vendor daemon is valid.
