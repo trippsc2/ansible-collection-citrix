@@ -1,0 +1,9 @@
+---
+- name: Prepare
+  hosts:
+    - subjects
+  tasks:
+    - name: Copy Citrix Workspace Environment Management Agent installer
+      ansible.windows.win_copy:
+        src: "{{ _ctxwem_agent_installer_source }}"
+        dest: "{{ ctxwem_agent_installer_path }}"

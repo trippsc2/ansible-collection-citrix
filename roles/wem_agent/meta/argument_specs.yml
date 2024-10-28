@@ -1,0 +1,19 @@
+---
+argument_specs:
+  main:
+    short_description: Citrix Workspace Environment Management Agent
+    description:
+      - This role installs the Citrix Workspace Environment Management Agent on Windows systems.  The role assumes that the agent will be configured by GPO.
+    author: Jim Tarpley
+    options:
+      ctxwem_agent_installer_path:
+        type: path
+        required: true
+        description:
+          - The path to the Citrix Workspace Environment Management Agent installer.
+      ctxwem_agent_cloud_deployment:
+        type: bool
+        required: false
+        default: true
+        description:
+          - Whether to install the agent for a Citrix Cloud deployment.

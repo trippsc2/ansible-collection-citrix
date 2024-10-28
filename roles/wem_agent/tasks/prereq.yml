@@ -1,0 +1,12 @@
+---
+- name: Install prerequisite with Chocolatey
+  chocolatey.chocolatey.win_chocolatey:
+    name:
+      - "{{ _ctxwem_agent_prerequisite }}"
+    state: present
+  register: _ctxwem_agent_prerequisite_result
+
+- name: Reboot if required
+  when:
+    - _ctxwem_agent_prerequisite_result.rc == 3010
+  ansible.windows.win_reboot:

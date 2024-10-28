@@ -1,0 +1,19 @@
+---
+- name: Install prerequisites
+  loop: "{{ _ctxwem_agent_prerequisites }}"
+  ansible.builtin.include_tasks: prereq.yml
+  loop_control:
+    loop_var: _ctxwem_agent_prerequisite
+
+- name: Install Citrix Workspace Environment Management Agent
+  ansible.windows.win_package:
+    path: "{{ ctxwem_agent_installer_path }}"
+    arguments: "/quiet Cloud={{ ctxwem_agent_cloud_deployment | ternary('1', '0') }}"
+    product_id: "{{ _ctxwem_agent_product_id }}"
+    state: present
+  register: _ctxwem_agent_install_result
+
+- name: Reboot if required
+  when:
+    - _ctxwem_agent_install_result.rc == 3010
+  ansible.windows.win_reboot:

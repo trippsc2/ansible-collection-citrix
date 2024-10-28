@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts:
+    - subjects
+  gather_facts: false
+  tasks:
+    - name: Check if the Citrix Workspace Environment Management Agent is installed
+      ansible.windows.win_powershell:
+        script: |
+          $Ansible.Changed = $false
+
+          $WEMAgent = ([array](Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Citrix Workspace Environment Management Agent*" }))
+
+          $Ansible.Result = $WEMAgent.Count -gt 0
+      register: _ctxwem_agent_installed
+
+    - name: Verify that the Citrix Workspace Environment Management Agent is installed
+      ansible.builtin.assert:
+        that:
+          - _ctxwem_agent_installed.result
+        fail_msg: The Citrix Workspace Environment Management Agent is not installed.
+        success_msg: The Citrix Workspace Environment Management Agent is installed.

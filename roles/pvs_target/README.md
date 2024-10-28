@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
 # Ansible Role: trippsc2.citrix.pvs_target
-Version: 1.1.0
+Version: 1.2.0
 
 This role installs the Citrix Provisioning Target Device software on Windows systems.
 

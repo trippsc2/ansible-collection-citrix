@@ -1,0 +1,33 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+  cachier: machine
+  parallel: true
+platforms:
+  - name: win
+    box: jtarpley/${MOLECULE_BOX:-w2022_cis}
+    memory: 4096
+    cpus: 2
+    provider_options:
+      default_prefix: citrix_wem_agent_
+    groups:
+      - subjects
+      - windows
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      subjects:
+        _ctxwem_agent_version: ${MOLECULE_CITRIX_WEM_VERSION:-2407}
+        _ctxwem_agent_installer_source: "../../../../files/wem_agent/{{ _ctxwem_agent_version }}/Citrix Workspace Environment Management Agent.exe"
+        ctxwem_agent_installer_path: C:\Windows\Temp\Citrix Workspace Environment Management Agent.exe
+      windows:
+        ansible_shell_type: powershell
+        ansible_become_method: runas
+        ansible_become_user: SYSTEM
+verifier:
+  name: ansible

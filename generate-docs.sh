@@ -20,6 +20,10 @@ cd ../pvs_target
 
 aar_doc . markdown
 
+cd ../wem_agent
+
+aar_doc . markdown
+
 cd ../win_server_vda
 
 aar_doc . markdown
