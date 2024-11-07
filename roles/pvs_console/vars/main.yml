@@ -1,6 +1,7 @@
 ---
 _ctxpvs_console_version_by_checksum:
   2f89bcb3075f0cecd9fdf680c527186d28a911d1: 2407
+  e1e99933bd3dd72bdc06b4fdbd12588b5668db3e: 2402
   020f9cd3ee0aad0eb825d993408df01f4eb741f5: 2402
   7cbdcb166ebf7dbf7c3a579c740c94fae8e0ddde: 2311
   e140ffd17e1224d708ba0419c69810f6beaa31a6: 2308
@@ -9,6 +10,11 @@ _ctxpvs_console_version_by_checksum:
 
 _ctxpvs_console_prerequisites_by_checksum:
   2f89bcb3075f0cecd9fdf680c527186d28a911d1:
+    - azurepowershell
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
+  e1e99933bd3dd72bdc06b4fdbd12588b5668db3e:
     - azurepowershell
     - dotnetfx
     - vcredist140
@@ -38,11 +44,21 @@ _ctxpvs_console_prerequisites_by_checksum:
 
 _ctxpvs_console_product_id_by_checksum:
   2f89bcb3075f0cecd9fdf680c527186d28a911d1: '{4D794CB5-1A20-4ACA-9502-CA57682F4519}'
+  e1e99933bd3dd72bdc06b4fdbd12588b5668db3e: '{A1C99D20-E3CA-4A34-8FA8-341930AF91A9}'
   020f9cd3ee0aad0eb825d993408df01f4eb741f5: '{03600FF7-AD2D-4E16-B23A-B48B2AC46FA4}'
   7cbdcb166ebf7dbf7c3a579c740c94fae8e0ddde: '{53914CD2-35BB-4235-AD25-F0B59445EE80}'
   e140ffd17e1224d708ba0419c69810f6beaa31a6: '{C4626305-8945-4ADC-80A2-6D54188C59E4}'
   09caefa858f283b53f4afdedfb37016da74480b5: '{C3365B5E-5878-43D0-A0F9-54C7820D115D}'
   a3be0c39cf546442c5fd2d4d449597e4965f5dc8: '{CE022533-E311-4D42-B675-285920C32273}'
+
+_ctxpvs_citrix_daas_powershell_sdk_product_id_by_checksum:
+  2f89bcb3075f0cecd9fdf680c527186d28a911d1: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'
+  e1e99933bd3dd72bdc06b4fdbd12588b5668db3e: '{02D21767-C3E3-4CCE-961A-FCA6F78FB5EC}'
+  020f9cd3ee0aad0eb825d993408df01f4eb741f5: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'
+  7cbdcb166ebf7dbf7c3a579c740c94fae8e0ddde: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'
+  e140ffd17e1224d708ba0419c69810f6beaa31a6: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'
+  09caefa858f283b53f4afdedfb37016da74480b5: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'
+  a3be0c39cf546442c5fd2d4d449597e4965f5dc8: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'
 
 _ctxpvs_citrix_daas_powershell_sdk_installer_path: >-
   {{ ctxpvs_console_installer_path | win_dirname }}\ISSetupPrerequisites\{1F8AAA3D-DC21-4A1E-1234-6C24843A68E3}\CitrixPoshSdk.exe
@@ -50,5 +66,3 @@ _ctxpvs_citrix_provisioning_gcp_installer_path: >-
   {{ ctxpvs_console_installer_path | win_dirname }}\ISSetupPrerequisites\{DC92F9AB-FF9F-41A8-AB82-3D06329BA354}\Citrix.Provisioning.Gcp.Installer.msi
 _ctxpvs_citrix_diagnostic_facility_installer_path: >-
   {{ ctxpvs_console_installer_path | win_dirname }}\ISSetupPrerequisites\{60F3781B-8B00-4002-8E57-3121324DEC7B}\cdf_x64.msi
-
-_ctxpvs_citrix_daas_powershell_sdk_product_id: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'

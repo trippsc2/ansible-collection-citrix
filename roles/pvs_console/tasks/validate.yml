@@ -39,3 +39,4 @@
   ansible.builtin.set_fact:
     _ctxpvs_console_prerequisites: "{{ _ctxpvs_console_prerequisites_by_checksum[_ctxpvs_console_installer_info.stat.checksum] }}"
     _ctxpvs_console_product_id: "{{ _ctxpvs_console_product_id_by_checksum[_ctxpvs_console_installer_info.stat.checksum] }}"
+    _ctxpvs_citrix_daas_powershell_sdk_product_id: "{{ _ctxpvs_citrix_daas_powershell_sdk_product_id_by_checksum[_ctxpvs_console_installer_info.stat.checksum] }}"

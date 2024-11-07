@@ -1,6 +1,7 @@
 ---
 _ctxpvs_target_version_by_checksum:
   14b156f7fa5b6d9461dc84e1c317c4ea9dbc1a67: 2407
+  67e54c7fc637cae10499525cda4c0edce89bd4f4: 2402
   aa128f108bed874ff27b2b64e95814711b9e60ae: 2402
   b7946ec1bf82dd6e5f2fe4389a7dee1b1cbf03a3: 2311
   235fef6108568a2b48f50fb22f47aafa16f63f97: 2308
@@ -9,6 +10,8 @@ _ctxpvs_target_version_by_checksum:
 
 _ctxpvs_target_prerequisites_by_checksum:
   14b156f7fa5b6d9461dc84e1c317c4ea9dbc1a67:
+    - vcredist140
+  67e54c7fc637cae10499525cda4c0edce89bd4f4:
     - vcredist140
   aa128f108bed874ff27b2b64e95814711b9e60ae:
     - vcredist140
@@ -20,6 +23,7 @@ _ctxpvs_target_prerequisites_by_checksum:
 
 _ctxpvs_target_product_id_by_checksum:
   14b156f7fa5b6d9461dc84e1c317c4ea9dbc1a67: '{109548D9-6226-4016-81C9-AB054BFCFA00}'
+  67e54c7fc637cae10499525cda4c0edce89bd4f4: '{3693E763-70F7-4664-9ED5-1902AED59BCC}'
   aa128f108bed874ff27b2b64e95814711b9e60ae: '{CF6B2043-3410-5ED5-BB59-C34F18A087A2}'
   b7946ec1bf82dd6e5f2fe4389a7dee1b1cbf03a3: '{4B6BF9BB-4233-4F66-97A8-DBB75630C7F7}'
   235fef6108568a2b48f50fb22f47aafa16f63f97: '{06BA5C87-7F42-4999-A30C-F1556CE39889}'
