@@ -1,15 +1,4 @@
 ---
-- name: Disable pagefile
-  when:
-    - _ctxvda_disable_pagefile
-  community.windows.win_pagefile:
-    automatic: false
-    remove_all: true
-    drive: C
-    state: absent
-  notify:
-    - _ctxvda_reboot
-
 - name: Flush all handlers
   ansible.builtin.meta: flush_handlers
 

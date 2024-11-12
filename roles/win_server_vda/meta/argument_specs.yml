@@ -11,13 +11,6 @@ argument_specs:
         required: true
         description:
           - Path to the VDA installer.
-      ctxvda_disable_pagefile:
-        type: bool
-        required: false
-        description:
-          - Whether to disable the pagefile on the system.
-          - If *ctxvda_install_type* is set to `remotepc`, this is defaults to `false`.
-          - Otherwise, this defaults to `true`.
       ctxvda_reduce_c_drive_permissions:
         type: bool
         required: false

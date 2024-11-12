@@ -371,12 +371,6 @@ _ctxvda_default_disabled_scheduled_tasks_by_install_type:
     - name: Recovery-Check
       path: \Microsoft\Windows\Workplace Join
 
-_ctxvda_default_disable_pagefile: >-
-  {{ ctxvda_install_type == 'mcs' or ctxvda_install_type == 'pvs' }}
-
-_ctxvda_disable_pagefile: >-
-  {{ ctxvda_disable_pagefile | default(_ctxvda_default_disable_pagefile) }}
-
 _ctxvda_default_install_vda_upgrade_agent: >-
   {{ ctxvda_install_type == 'remotepc' }}
 

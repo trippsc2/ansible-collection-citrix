@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
 # Ansible Role: trippsc2.citrix.win_server_vda
-Version: 1.2.1
+Version: 1.3.0
 
 This role installs and configures Citrix Virtual Delivery Agent for Multi-session OS on Windows servers.
 
@@ -22,7 +22,6 @@ This role installs and configures Citrix Virtual Delivery Agent for Multi-sessio
 |Option|Description|Type|Required|Choices|Default|
 |---|---|---|---|---|---|
 | ctxvda_installer_path | <p>Path to the VDA installer.</p> | path | yes |  |  |
-| ctxvda_disable_pagefile | <p>Whether to disable the pagefile on the system.</p><p>If *ctxvda_install_type* is set to `remotepc`, this is defaults to `false`.</p><p>Otherwise, this defaults to `true`.</p> | bool | no |  | false |
 | ctxvda_reduce_c_drive_permissions | <p>Whether to reduce the permissions on the C drive.</p> | bool | no |  | true |
 | ctxvda_install_remote_assistance | <p>Whether to install the Remote Assistance feature.</p> | bool | no |  | true |
 | ctxvda_install_type | <p>The type of VDA installation to perform.</p> | str | no | <ul><li>mcs</li><li>pvs</li><li>remotepc</li></ul> | mcs |
