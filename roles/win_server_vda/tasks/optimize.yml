@@ -79,18 +79,32 @@
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 
-- name: Ensure unneeded services are stopped and disabled
+- name: Ensure service is stopped and disabled
   loop: "{{ _ctxvda_disabled_services }}"
   when:
     - ctxvda_manage_services
-  ansible.builtin.include_tasks: disable-service.yml
+  ansible.windows.win_service:
+    name: "{{ item.name }}"
+    state: stopped
+    start_mode: disabled
+  register: _ctxvda_service_disabled
+  failed_when:
+    - _ctxvda_service_disabled is failed
+    - ("is not installed" not in _ctxvda_service_disabled.msg)
   loop_control:
     label: "{{ item.display_name }}"
 
-- name: Ensure unneeded scheduled tasks are disabled
+- name: Ensure scheduled task is disabled
   loop: "{{ _ctxvda_disabled_scheduled_tasks }}"
   when:
     - ctxvda_manage_scheduled_tasks
-  ansible.builtin.include_tasks: disable-scheduled-task.yml
+  community.windows.win_scheduled_task:
+    name: "{{ item.name }}"
+    path: "{{ item.path }}"
+    enabled: false
+  register: _ctxvda_task_disabled
+  failed_when:
+    - _ctxvda_task_disabled is failed
+    - ("cannot create a task with no actions" not in _ctxvda_task_disabled.msg)
   loop_control:
     label: "{{ item.name }}"
