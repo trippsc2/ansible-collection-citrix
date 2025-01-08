@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
 # Ansible Role: trippsc2.citrix.pvs_console
-Version: 1.3.1
+Version: 1.3.2
 
 This role installs the Citrix Provisioning Console on Windows systems.
 

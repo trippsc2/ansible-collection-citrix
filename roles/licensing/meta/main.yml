@@ -3,7 +3,7 @@ galaxy_info:
   author: Jim Tarpley
   namespace: trippsc2
   role_name: licensing
-  description: This role installs the Citrix Licensing server on Windows systems.
+  description: This role installs the Citrix Licensing server on Windows servers.
 
   license: MIT
 

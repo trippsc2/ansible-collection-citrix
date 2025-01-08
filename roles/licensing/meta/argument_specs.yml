@@ -3,7 +3,7 @@ argument_specs:
   main:
     short_description: Citrix Licensing
     description:
-      - This role installs the Citrix Licensing server on Windows systems.
+      - This role installs the Citrix Licensing server on Windows servers.
     author: Jim Tarpley
     options:
       ctxlic_installer_path:

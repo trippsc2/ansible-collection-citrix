@@ -2,28 +2,28 @@
 
 cd ./roles/cqi
 
-aar_doc . markdown
+aar-doc . markdown
 
 cd ../licensing
 
-aar_doc . markdown
+aar-doc . markdown
 
 cd ../pvs_console
 
-aar_doc . markdown
+aar-doc . markdown
 
 cd ../pvs_server
 
-aar_doc . markdown
+aar-doc . markdown
 
 cd ../pvs_target
 
-aar_doc . markdown
+aar-doc . markdown
 
 cd ../wem_agent
 
-aar_doc . markdown
+aar-doc . markdown
 
 cd ../win_server_vda
 
-aar_doc . markdown
+aar-doc . markdown
