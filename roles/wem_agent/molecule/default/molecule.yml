@@ -22,7 +22,7 @@ provisioner:
   inventory:
     group_vars:
       subjects:
-        _ctxwem_agent_version: ${MOLECULE_CITRIX_WEM_VERSION:-2407}
+        _ctxwem_agent_version: ${MOLECULE_CITRIX_WEM_VERSION:-2411}
         _ctxwem_agent_installer_source: "../../../../files/wem_agent/{{ _ctxwem_agent_version }}/Citrix Workspace Environment Management Agent.exe"
         ctxwem_agent_installer_path: C:\Windows\Temp\Citrix Workspace Environment Management Agent.exe
       windows:

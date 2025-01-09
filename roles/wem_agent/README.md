@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
 # Ansible Role: trippsc2.citrix.wem_agent
-Version: 1.3.2
+Version: 1.3.3
 
 This role installs the Citrix Workspace Environment Management Agent on Windows systems.  The role assumes that the agent will be configured by GPO.
 

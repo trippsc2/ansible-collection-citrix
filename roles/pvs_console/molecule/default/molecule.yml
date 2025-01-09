@@ -22,7 +22,7 @@ provisioner:
   inventory:
     group_vars:
       subjects:
-        _ctxpvs_version: ${MOLECULE_CITRIX_PVS_VERSION:-2407}
+        _ctxpvs_version: ${MOLECULE_CITRIX_PVS_VERSION:-2411}
         _ctxpvs_console_installer_source: "../../../../files/pvs_console/{{ _ctxpvs_version }}"
         ctxpvs_console_installer_path: "C:\\Windows\\Temp\\pvs_console\\{{ _ctxpvs_version }}\\PVS_Console_x64.exe"
       windows:

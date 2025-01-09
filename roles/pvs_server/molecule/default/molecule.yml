@@ -45,7 +45,7 @@ provisioner:
       all:
         mssql_sa_password: SecurePassword123!
       subjects:
-        _ctxpvs_version: ${MOLECULE_CITRIX_PVS_VERSION:-2407}
+        _ctxpvs_version: ${MOLECULE_CITRIX_PVS_VERSION:-2411}
         _ctxpvs_console_installer_source: "../../../../files/pvs_console/{{ _ctxpvs_version }}"
         _ctxpvs_server_installer_source: "../../../../files/pvs_server/{{ _ctxpvs_version }}"
         _ctxpvs_licensing_installer_source: "../../../../files/licensing"

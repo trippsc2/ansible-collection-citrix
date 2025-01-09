@@ -1,5 +1,6 @@
 ---
 _ctxwem_agent_version_by_checksum:
+  e11eaf4172d5f982c9ebf331b547bca4d3ac05ce: 2411
   de2fb1f504d370d1bc38bb338161e2b81a9803f1: 2407
   0df783f7c939e1d76498c1f43fe01555de089728: 2402
   496856b6c2003305f2132530b7f9c47ec00a7564: 2402
@@ -9,6 +10,10 @@ _ctxwem_agent_version_by_checksum:
   9dd1893c40025661353f0e2ce488431d25a16b2a: 2303
 
 _ctxwem_agent_prerequisites_by_checksum:
+  e11eaf4172d5f982c9ebf331b547bca4d3ac05ce:
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
   de2fb1f504d370d1bc38bb338161e2b81a9803f1:
     - dotnetfx
     - vcredist140
@@ -39,6 +44,7 @@ _ctxwem_agent_prerequisites_by_checksum:
     - webview2-runtime
 
 _ctxwem_agent_product_id_by_checksum:
+  e11eaf4172d5f982c9ebf331b547bca4d3ac05ce: '{43E2EBEF-FB31-4902-931D-2AB73F92F69B}'
   de2fb1f504d370d1bc38bb338161e2b81a9803f1: '{A7FEC377-ECAE-42FA-804D-73D21F57886B}'
   0df783f7c939e1d76498c1f43fe01555de089728: '{4C5F4912-8274-4D18-91A8-38098C05E392}'
   496856b6c2003305f2132530b7f9c47ec00a7564: '{C15D74CF-ACFF-4DD2-9BD7-38F4E4717D29}'
