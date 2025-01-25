@@ -83,10 +83,12 @@ provisioner:
         ansible_become_method: runas
         ansible_become_user: SYSTEM
         ansible_password: vagrant
-        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
     host_vars:
+      dc:
+        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
       mssql:
         ansible_user: TEST\vagrant
+        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
         _mssql_setup_source_path: ../../../../files/mssql
         mssql_vault_manage_sa_password: false
         mssql_configure_monitoring: false
@@ -100,5 +102,6 @@ provisioner:
         mssql_skip_reboot: false
       win:
         ansible_user: TEST\vagrant
+        ansible_ssh_common_args: '-o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=60s -o ForwardX11=no -o LogLevel=ERROR -o StrictHostKeyChecking=no'
 verifier:
   name: ansible
