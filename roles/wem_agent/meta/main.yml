@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Jim Tarpley
+  author: Jim Tarpley (@trippsc2)
   namespace: trippsc2
   role_name: wem_agent
   description: This role installs the Citrix Workspace Environment Management Agent on Windows systems.  The role assumes that the agent will be configured by GPO.

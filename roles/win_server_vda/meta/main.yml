@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Jim Tarpley
+  author: Jim Tarpley (@trippsc2)
   namespace: trippsc2
   role_name: win_server_vda
   description: This role installs and configures Citrix Virtual Delivery Agent for Multi-session OS on Windows servers.

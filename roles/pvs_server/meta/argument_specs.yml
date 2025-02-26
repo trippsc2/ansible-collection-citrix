@@ -4,7 +4,7 @@ argument_specs:
     short_description: Citrix Provisioning Server
     description:
       - This role installs the Citrix Provisioning Server software on Windows servers.
-    author: Jim Tarpley
+    author: Jim Tarpley (@trippsc2)
     options:
       ctxpvs_server_installer_path:
         type: path
