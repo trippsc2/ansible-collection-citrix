@@ -4,7 +4,7 @@ name: citrix
 version: 1.3.3
 readme: README.md
 authors:
-  - Jim Tarpley
+  - Jim Tarpley (@trippsc2)
 description: This collection contains modules and roles for installing and configuring Citrix applications.
 
 license_file: 'LICENSE'
