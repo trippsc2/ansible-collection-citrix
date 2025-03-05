@@ -1,5 +1,7 @@
 **/*.pyc
 **/*.tar.gz
-**/*.msi
+**/.ansible
+**/*.dll
 **/*.exe
+**/*.msi
 files/**/*
