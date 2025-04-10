@@ -33,7 +33,7 @@
   ansible.builtin.assert:
     that:
       - _ctxvda_installer_info.stat.checksum in _ctxvda_version_by_checksum.keys()
-    fail_msg: "The installer file '{{ ctxvda_installer_path }}' is not from a supported version. Supported versions are between 2303 and 2407."
+    fail_msg: "The installer file '{{ ctxvda_installer_path }}' is not from a supported version. Supported versions are: {{ _ctxvda_version_by_checksum.values() | join(', ') }}"
     success_msg: "The installer file '{{ ctxvda_installer_path }}' is for version '{{ _ctxvda_version_by_checksum[_ctxvda_installer_info.stat.checksum] }}' which is supported."
 
 - name: Set Product ID variable

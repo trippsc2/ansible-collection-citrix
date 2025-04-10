@@ -32,7 +32,7 @@
   ansible.builtin.assert:
     that:
       - _ctxwem_agent_installer_info.stat.checksum in _ctxwem_agent_version_by_checksum.keys()
-    fail_msg: "The installer file '{{ ctxwem_agent_installer_path }}' is not from a supported version. Supported versions are between 2303 and 2407."
+    fail_msg: "The installer file '{{ ctxwem_agent_installer_path }}' is not from a supported version. Supported versions are: {{ _ctxwem_agent_version_by_checksum.values() | join(', ') }}"
     success_msg: "The installer file '{{ ctxwem_agent_installer_path }}' is for version '{{ _ctxwem_agent_version_by_checksum[_ctxwem_agent_installer_info.stat.checksum] }}' which is supported."
 
 - name: Set version-specific variables

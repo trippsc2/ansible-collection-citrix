@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
 # Ansible Role: trippsc2.citrix.licensing
-Version: 1.3.3
+Version: 1.4.0
 
 This role installs the Citrix Licensing server on Windows servers.
 
@@ -33,5 +33,5 @@ This role installs the Citrix Licensing server on Windows servers.
 MIT
 
 ## Author and Project Information
-Jim Tarpley
+Jim Tarpley (@trippsc2)
 <!-- END_ANSIBLE_DOCS -->

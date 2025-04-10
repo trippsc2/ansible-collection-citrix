@@ -32,7 +32,7 @@
   ansible.builtin.assert:
     that:
       - _ctxpvs_console_installer_info.stat.checksum in _ctxpvs_console_version_by_checksum.keys()
-    fail_msg: "The installer file '{{ ctxpvs_console_installer_path }}' is not from a supported version. Supported versions are between 2303 and 2407."
+    fail_msg: "The installer file '{{ ctxpvs_console_installer_path }}' is not from a supported version. Supported versions are: {{ _ctxpvs_console_version_by_checksum.values() | join(', ') }}"
     success_msg: "The installer file '{{ ctxpvs_console_installer_path }}' is for version '{{ _ctxpvs_console_version_by_checksum[_ctxpvs_console_installer_info.stat.checksum] }}' which is supported."
 
 - name: Set version-specific variables

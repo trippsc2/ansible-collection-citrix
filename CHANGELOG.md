@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2025-04-10
+
+### Role - pvs_console
+
+- Added support for 2402 CU2 to be installed.
+
+### Role - pvs_server
+
+- Added support for 2402 CU2 to be installed.
+
+### Role - pvs_target
+
+- Added support for 2402 CU2 to be installed.
+
+### Role - win_server_vda
+
+- Added support for 2402 CU2 to be installed.
+
 ## [1.3.3] - 2025-01-09
 
 ### Role - pvs_console
