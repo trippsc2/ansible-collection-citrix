@@ -61,7 +61,7 @@ jobs:
         run: |
           source ~/venv/ansible-2.16/bin/activate
           rm -rf ~/.ansible/collections/ansible_collections/*
-          ln -s ~/files/ansible-collection-citrix ./files
+          ln -s ~/files/ansible-collection-citrix $HOME/files
           cd ./roles/pvs_console
           molecule test
           rm -rf ~/.ansible/collections/ansible_collections/*

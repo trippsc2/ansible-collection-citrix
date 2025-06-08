@@ -28,12 +28,11 @@ defaults:
     working-directory: 'trippsc2.citrix'
 jobs:
   molecule:
-    name: Run Molecule test
-    uses: trippsoft/github-actions/.github/workflows/molecule.yml@main
-    with:
-      working_directory: 'trippsc2.citrix'
-      role_name: 'licensing'
-      box: ${{ matrix.box }}
+    name: Run Molecule tests
+    runs-on:
+      - self-hosted
+      - linux
+      - x64
     strategy:
       fail-fast: false
       matrix:
@@ -41,3 +40,22 @@ jobs:
           - w2025_cis
           - w2022_cis
           - w2019_cis
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: 'trippsc2.citrix'
+      - name: Run Molecule tests
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          rm -rf ~/.ansible/collections/ansible_collections/*
+          ln -s ~/files/ansible-collection-citrix $HOME/files
+          cd ./roles/licensing
+          molecule test
+          rm -rf ~/.ansible/collections/ansible_collections/*
+          rm ./files
+          deactivate
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: '1'
+          MOLECULE_BOX: ${{ matrix.box }}
