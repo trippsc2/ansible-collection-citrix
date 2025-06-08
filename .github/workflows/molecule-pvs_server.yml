@@ -1,0 +1,72 @@
+---
+name: Molecule - pvs_server role
+'on':
+  workflow_call: {}
+  workflow_dispatch: {}
+  pull_request:
+    branches:
+      - main
+    paths:
+      - galaxy.yml
+      - roles/pvs_server/**
+      - '!roles/pvs_server/.aar_doc.yml'
+      - '!roles/pvs_server/README.md'
+      - '!roles/pvs_server/meta/argument_specs.yml'
+      - '!roles/pvs_server/meta/main.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - galaxy.yml
+      - roles/pvs_server/**
+      - '!roles/pvs_server/.aar_doc.yml'
+      - '!roles/pvs_server/README.md'
+      - '!roles/pvs_server/meta/argument_specs.yml'
+      - '!roles/pvs_server/meta/main.yml'
+defaults:
+  run:
+    working-directory: 'trippsc2.citrix'
+jobs:
+  molecule:
+    name: Run Molecule tests
+    runs-on:
+      - self-hosted
+      - linux
+      - x64
+    strategy:
+      fail-fast: false
+      matrix:
+        box:
+          - w2025_cis
+          - w2022_cis
+          - w2019_cis
+        version:
+          - '2311'
+          - '2402'
+          - '2407'
+          - '2411'
+        exclude:
+          - box: w2025_cis
+            version: '2402'
+          - box: w2025_cis
+            version: '2311'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: 'trippsc2.citrix'
+      - name: Run Molecule tests
+        run: |
+          source ~/venv/ansible-2.16/bin/activate
+          rm -rf ~/.ansible/collections/ansible_collections/*
+          ln -s ~/files/ansible-collection-citrix ./files
+          cd ./roles/pvs_server
+          molecule test
+          rm -rf ~/.ansible/collections/ansible_collections/*
+          rm ./files
+          deactivate
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: '1'
+          MOLECULE_BOX: ${{ matrix.box }}
+          MOLECULE_CITRIX_PVS_VERSION: ${{ matrix.version }}

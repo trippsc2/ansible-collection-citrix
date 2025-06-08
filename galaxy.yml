@@ -1,7 +1,7 @@
 ---
 namespace: trippsc2
 name: citrix
-version: 1.4.0
+version: 1.4.1
 readme: README.md
 authors:
   - Jim Tarpley (@trippsc2)
@@ -18,7 +18,7 @@ dependencies:
   chocolatey.chocolatey: '>=1.0.0'
   community.windows: '>=1.0.0'
 
-repository: https://github.com/trippsc2/ansible-collection-citrix.git
+repository: https://github.com/trippsoft/ansible-collection-citrix.git
 
 manifest:
   directives:

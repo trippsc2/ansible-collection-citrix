@@ -1,0 +1,80 @@
+---
+name: Generate Role Docs
+'on':
+  workflow_dispatch: {}
+  pull_request:
+    branches:
+      - main
+    paths:
+      - galaxy.yml
+  push:
+    branches:
+      - main
+    paths:
+      - galaxy.yml
+defaults:
+  run:
+    working-directory: 'trippsc2.citrix'
+jobs:
+  docs_cqi:
+    name: Generate cqi role documentation
+    permissions:
+      contents: write
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.citrix'
+      role_name: 'cqi'
+  docs_licensing:
+    name: Generate licensing role documentation
+    permissions:
+      contents: write
+    needs: docs_cqi
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.citrix'
+      role_name: 'licensing'
+  docs_pvs_console:
+    name: Generate pvs_console role documentation
+    permissions:
+      contents: write
+    needs: docs_licensing
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.citrix'
+      role_name: 'pvs_console'
+  docs_pvs_server:
+    name: Generate pvs_server role documentation
+    permissions:
+      contents: write
+    needs: docs_pvs_console
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.citrix'
+      role_name: 'pvs_server'
+  docs_pvs_target:
+    name: Generate pvs_target role documentation
+    permissions:
+      contents: write
+    needs: docs_pvs_server
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.citrix'
+      role_name: 'pvs_target'
+  docs_wem_agent:
+    name: Generate wem_agent role documentation
+    permissions:
+      contents: write
+    needs: docs_pvs_target
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.citrix'
+      role_name: 'wem_agent'
+  docs_win_server_vda:
+    name: Generate win_server_vda role documentation
+    permissions:
+      contents: write
+    needs: docs_wem_agent
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.citrix'
+      role_name: 'win_server_vda'

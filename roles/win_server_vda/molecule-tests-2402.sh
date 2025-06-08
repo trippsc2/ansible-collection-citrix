@@ -1,6 +1,0 @@
-#! /bin/bash
-
-set -e
-
-MOLECULE_BOX="w2022_cis" MOLECULE_CITRIX_VDA_VERSION="2402" molecule test
-MOLECULE_BOX="w2019_cis" MOLECULE_CITRIX_VDA_VERSION="2402" molecule test

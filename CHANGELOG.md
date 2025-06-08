@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2025-06-09
+
+### Collection
+
+- Changed repository URL to use GitHub Organization.
+
 ## [1.4.0] - 2025-04-10
 
 ### Role - pvs_console

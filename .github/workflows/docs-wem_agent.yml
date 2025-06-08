@@ -1,0 +1,32 @@
+---
+name: Generate Role Docs - wem_agent role
+'on':
+  workflow_dispatch: {}
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/docs-wem_agent.yml
+      - roles/wem_agent/.aar_doc.yml
+      - roles/wem_agent/meta/argument_specs.yml
+      - roles/wem_agent/meta/main.yml
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/docs-wem_agent.yml
+      - roles/wem_agent/.aar_doc.yml
+      - roles/wem_agent/meta/argument_specs.yml
+      - roles/wem_agent/meta/main.yml
+defaults:
+  run:
+    working-directory: 'trippsc2.citrix'
+jobs:
+  docs:
+    name: Generate wem_agent role documentation
+    permissions:
+      contents: write
+    uses: trippsoft/github-actions/.github/workflows/role-docs.yml@main
+    with:
+      working_directory: 'trippsc2.citrix'
+      role_name: 'wem_agent'
