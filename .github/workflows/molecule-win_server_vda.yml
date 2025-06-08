@@ -63,7 +63,7 @@ jobs:
           cd ./roles/win_server_vda
           molecule test
           rm -rf ~/.ansible/collections/ansible_collections/*
-          rm ./files
+          rm $HOME/files
           deactivate
         env:
           ANSIBLE_FORCE_COLOR: '1'
