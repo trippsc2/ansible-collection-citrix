@@ -49,11 +49,11 @@ jobs:
         run: |
           source ~/venv/ansible-2.16/bin/activate
           rm -rf ~/.ansible/collections/ansible_collections/*
-          ln -s ~/files/ansible-collection-citrix $HOME/files
+          ln -s ~/files/ansible-collection-citrix ./files
           cd ./roles/licensing
           molecule test
           rm -rf ~/.ansible/collections/ansible_collections/*
-          rm $HOME/files
+          rm ../../files
           deactivate
         env:
           ANSIBLE_FORCE_COLOR: '1'
