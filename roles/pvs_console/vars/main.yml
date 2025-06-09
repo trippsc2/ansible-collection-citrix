@@ -1,5 +1,6 @@
 ---
 _ctxpvs_console_version_by_checksum:
+  c1708f5634f297fc38db2b67c87d6ba52858f4bf: '2503'
   80f68c682add965179ac855b1448363956e0c5e5: '2411'
   2f89bcb3075f0cecd9fdf680c527186d28a911d1: '2407'
   5d578e72d25806b5c22f06a70ee11e7e2a5033a4: 2402 CU2
@@ -11,6 +12,11 @@ _ctxpvs_console_version_by_checksum:
   a3be0c39cf546442c5fd2d4d449597e4965f5dc8: '2303'
 
 _ctxpvs_console_prerequisites_by_checksum:
+  c1708f5634f297fc38db2b67c87d6ba52858f4bf:
+    - azurepowershell
+    - dotnetfx
+    - vcredist140
+    - webview2-runtime
   80f68c682add965179ac855b1448363956e0c5e5:
     - azurepowershell
     - dotnetfx
@@ -55,6 +61,7 @@ _ctxpvs_console_prerequisites_by_checksum:
     - vcredist140
 
 _ctxpvs_console_product_id_by_checksum:
+  c1708f5634f297fc38db2b67c87d6ba52858f4bf: '{A084AEC4-A34D-4661-ACCC-604E6A043D8D}'
   80f68c682add965179ac855b1448363956e0c5e5: '{6DAB51DF-3481-4CF8-8CFF-65DA9AC82493}'
   2f89bcb3075f0cecd9fdf680c527186d28a911d1: '{4D794CB5-1A20-4ACA-9502-CA57682F4519}'
   5d578e72d25806b5c22f06a70ee11e7e2a5033a4: '{17936D94-96F3-4418-95E7-B5DF21D07A61}'
@@ -66,6 +73,7 @@ _ctxpvs_console_product_id_by_checksum:
   a3be0c39cf546442c5fd2d4d449597e4965f5dc8: '{CE022533-E311-4D42-B675-285920C32273}'
 
 _ctxpvs_citrix_daas_powershell_sdk_product_id_by_checksum:
+  c1708f5634f297fc38db2b67c87d6ba52858f4bf: '{4B03A938-A59A-40CC-BC75-5449C4EC50F0}'
   80f68c682add965179ac855b1448363956e0c5e5: '{4B03A938-A59A-40CC-BC75-5449C4EC50F0}'
   2f89bcb3075f0cecd9fdf680c527186d28a911d1: '{91A82B29-B64D-4F23-9D99-9B53CE99658D}'
   5d578e72d25806b5c22f06a70ee11e7e2a5033a4: '{02D21767-C3E3-4CCE-961A-FCA6F78FB5EC}'
