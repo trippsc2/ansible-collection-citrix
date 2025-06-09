@@ -41,15 +41,9 @@ jobs:
           - w2022_cis
           - w2019_cis
         version:
-          - '2311'
           - '2402'
           - '2407'
           - '2411'
-        exclude:
-          - box: w2025_cis
-            version: '2402'
-          - box: w2025_cis
-            version: '2311'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
