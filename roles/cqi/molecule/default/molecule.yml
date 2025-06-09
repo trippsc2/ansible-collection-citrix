@@ -23,8 +23,8 @@ provisioner:
     group_vars:
       subjects:
         _ctxcqi_installer: ../../../../files/cqi/CitrixCQI.msi
-        _ctxvda_installer: ../../../../files/server_vda/VDAServerSetup_2407.exe
-        ctxvda_installer_path: C:\Windows\Temp\VDAServerSetup_2407.exe
+        _ctxvda_installer: ../../../../files/server_vda/VDAServerSetup_2503.exe
+        ctxvda_installer_path: C:\Windows\Temp\VDAServerSetup_2503.exe
         ctxvda_controller_list:
           - dc1.test.loc
           - dc2.test.loc
