@@ -2,14 +2,6 @@
 name: Generate Role Docs - pvs_console role
 'on':
   workflow_dispatch: {}
-  pull_request:
-    branches:
-      - main
-    paths:
-      - .github/workflows/docs-pvs_console.yml
-      - roles/pvs_console/.aar_doc.yml
-      - roles/pvs_console/meta/argument_specs.yml
-      - roles/pvs_console/meta/main.yml
   push:
     branches:
       - main
