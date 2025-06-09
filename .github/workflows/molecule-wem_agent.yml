@@ -43,9 +43,10 @@ jobs:
           - w11_23h2_base
           - w10_22h2_base
         version:
-          - '2402'
-          - '2407'
+          - '2503'
           - '2411'
+          - '2407'
+          - '2402'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
