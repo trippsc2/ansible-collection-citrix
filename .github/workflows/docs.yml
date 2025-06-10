@@ -7,6 +7,34 @@ name: Generate Role Docs
       - main
     paths:
       - galaxy.yml
+      - roles/cqi/.aar_doc.yml
+      - roles/cqi/README.md
+      - roles/cqi/meta/argument_specs.yml
+      - roles/cqi/meta/main.yml
+      - roles/licensing/.aar_doc.yml
+      - roles/licensing/README.md
+      - roles/licensing/meta/argument_specs.yml
+      - roles/licensing/meta/main.yml
+      - roles/pvs_console/.aar_doc.yml
+      - roles/pvs_console/README.md
+      - roles/pvs_console/meta/argument_specs.yml
+      - roles/pvs_console/meta/main.yml
+      - roles/pvs_server/.aar_doc.yml
+      - roles/pvs_server/README.md
+      - roles/pvs_server/meta/argument_specs.yml
+      - roles/pvs_server/meta/main.yml
+      - roles/pvs_target/.aar_doc.yml
+      - roles/pvs_target/README.md
+      - roles/pvs_target/meta/argument_specs.yml
+      - roles/pvs_target/meta/main.yml
+      - roles/wem_agent/.aar_doc.yml
+      - roles/wem_agent/README.md
+      - roles/wem_agent/meta/argument_specs.yml
+      - roles/wem_agent/meta/main.yml
+      - roles/win_server_vda/.aar_doc.yml
+      - roles/win_server_vda/README.md
+      - roles/win_server_vda/meta/argument_specs.yml
+      - roles/win_server_vda/meta/main.yml
 defaults:
   run:
     working-directory: 'trippsc2.citrix'
