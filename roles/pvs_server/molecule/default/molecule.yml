@@ -9,7 +9,7 @@ driver:
   parallel: true
 platforms:
   - name: dc
-    box: jtarpley/w2022_cis
+    box: jtarpley/w2025_cis
     memory: 2048
     cpus: 2
     groups:
@@ -18,7 +18,7 @@ platforms:
     provider_options:
       default_prefix: citrix_pvs_server_
   - name: mssql
-    box: jtarpley/w2022_cis
+    box: jtarpley/w2025_cis
     memory: 4096
     cpus: 2
     groups:
