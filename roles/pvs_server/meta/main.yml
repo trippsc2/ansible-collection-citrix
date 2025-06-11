@@ -12,12 +12,15 @@ galaxy_info:
   platforms:
     - name: Windows
       versions:
-        - '2019'
+        - '2025'
         - '2022'
+        - '2019'
 
 collections:
+  - ansible.utils
   - ansible.windows
-  - community.windows
+  - chocolatey.chocolatey
+  - community.general
 
 dependencies:
   - role: trippsc2.citrix.pvs_console

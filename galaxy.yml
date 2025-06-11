@@ -1,7 +1,7 @@
 ---
 namespace: trippsc2
 name: citrix
-version: 1.5.0
+version: 1.5.1
 readme: README.md
 authors:
   - Jim Tarpley (@trippsc2)
@@ -14,9 +14,11 @@ tags:
   - windows
 
 dependencies:
-  ansible.windows: '>=1.0.0'
+  ansible.utils: '>=2.5.0'
+  ansible.windows: '>=1.5.0'
   chocolatey.chocolatey: '>=1.0.0'
-  community.windows: '>=1.0.0'
+  community.general: '>=8.1.0'
+  community.windows: '>=1.5.0'
 
 repository: https://github.com/trippsoft/ansible-collection-citrix.git
 
